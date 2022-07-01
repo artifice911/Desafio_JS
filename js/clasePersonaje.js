@@ -119,10 +119,10 @@ function elegirPersonaje(){
 
 function mostrarConsola(){
     if(Personaje.skillPuntos==0 && inventario.length>=3){
-        dataConsola = parseInt(prompt("     //////////////////////// EDITA TU PERSONAJE ///////////////////////// \n                     " +Personaje.nombre+"  ||  "+inventario.length+" objetos"+"  ||  "+"$"+Personaje.dinero+"  ||  "+Personaje.skillPuntos+" SkillPoints \n \n (1) VER PERSONAJE \n (2) EDITAR SKILLS \n (3) VER EQUIPAMIENTO \n (4) TERMINAR EDICION \n \n                           ¡YA PUEDES COMENZAR TU AVENTURA!"));
+        dataConsola = parseInt(prompt("     //////////////////////// EDITA TU PERSONAJE ///////////////////////// \n                     " +Personaje.nombre+"  ||  "+inventario.length+" objetos"+"  ||  "+"$"+Personaje.dinero+"  ||  "+Personaje.skillPuntos+" SkillPoints \n \n (1) VER PERSONAJE \n (2) EDITAR SKILLS \n (3) VER OBJETOS \n (4) TERMINAR EDICION \n \n                           ¡YA PUEDES COMENZAR TU AVENTURA!"));
     }
     else{
-        dataConsola = parseInt(prompt("     //////////////////////// EDITA TU PERSONAJE ///////////////////////// \n                     " +Personaje.nombre+"  ||  "+inventario.length+" objetos"+"  ||  "+"$"+Personaje.dinero+"  ||  "+Personaje.skillPuntos+" SkillPoints \n \n (1) VER PERSONAJE \n (2) EDITAR SKILLS \n (3) VER EQUIPAMIENTO \n (4) TERMINAR EDICION \n \n(Tareas: comprar "+comprarObj+" objetos y agregar "+Personaje.skillPuntos+" SkillPoints para continuar)"));
+        dataConsola = parseInt(prompt("     //////////////////////// EDITA TU PERSONAJE ///////////////////////// \n                     " +Personaje.nombre+"  ||  "+inventario.length+" objetos"+"  ||  "+"$"+Personaje.dinero+"  ||  "+Personaje.skillPuntos+" SkillPoints \n \n (1) VER PERSONAJE \n (2) EDITAR SKILLS \n (3) VER OBJETOS \n (4) TERMINAR EDICION \n \n(Tareas: comprar "+comprarObj+" OBJETOS y agregar "+Personaje.skillPuntos+" SKILLS para continuar)"));
     }
     while(dataConsola==null || dataConsola<=0 || dataConsola>=6){
         mostrarConsola();
