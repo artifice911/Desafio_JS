@@ -48,18 +48,21 @@ class Equipamiento{
         this.resistencia = resistencia
     }
 }
-const Escudo = new Equipamiento("Escudo",300,10,20,100);
-const Espada = new Equipamiento("Espada",400,90,15,50);
-const Arco = new Equipamiento("Arco",350,45,10,30);
-const Yelmo = new Equipamiento("Yelmo",200,15,20,70);
-const Ballesta = new Equipamiento("Ballesta",300,70,20,10);
-const Pechera = new Equipamiento("Pechera",250,5,25,80);
+
+const Weapon1 = new Equipamiento("ESPADA",400,90,15,50);
+const Weapon2 = new Equipamiento("ARCO",350,45,10,30);
+const Weapon3 = new Equipamiento("BALLESTA",300,70,20,10);
+const Armor1 = new Equipamiento("ESCUDO",300,10,20,100);
+const Armor2 = new Equipamiento("YELMO",200,15,20,70);
+const Armor3 = new Equipamiento("PECHERA",250,5,25,80);
 
 let nombre;
 let char;
 let charOk;
 let dataConsola;
 let comprarObj = 3;
+
+const inventario = [];
 
 //INICIAR PROGRAMA
 pedirNombre();
@@ -68,7 +71,7 @@ function pedirNombre(){
 nombre = prompt("          //////////////////////////       INICIO       ////////////////////////// \n \n   ¡Hola forastero! Te encuentras en el yermo de las tierras de Singular.\n                                          ¿CÓMO TE LLAMAS?");
 while (nombre=="" || nombre==null){
     nombre = prompt("          //////////////////////////       INICIO       ////////////////////////// \n \nCreo que no entendí tu nombre, ¿cómo te llamas?");
-}
+};
 elegirPersonaje();
 }
 
@@ -111,11 +114,16 @@ function elegirPersonaje(){
         default:
             elegirPersonaje();
             break;
-    }
+    };
 }
 
 function mostrarConsola(){
-    dataConsola = parseInt(prompt("     //////////////////////// EDITA TU PERSONAJE ///////////////////////// \n                     " +Personaje.nombre+"  ||  "+Personaje.edad+" años"+"  ||  "+"$"+Personaje.dinero+"  ||  "+Personaje.skillPuntos+" SkillPoints \n \n (1) VER PERSONAJE \n (2) EDITAR SKILLS \n (3) VER EQUIPAMIENTO \n (4) TERMINAR EDICION \n \n(Tareas: compra "+comprarObj+" equipamientos y agrega "+Personaje.skillPuntos+" SkillPoints para continuar)"));
+    if(Personaje.skillPuntos==0 && inventario.length>=3){
+        dataConsola = parseInt(prompt("     //////////////////////// EDITA TU PERSONAJE ///////////////////////// \n                     " +Personaje.nombre+"  ||  "+inventario.length+" objetos"+"  ||  "+"$"+Personaje.dinero+"  ||  "+Personaje.skillPuntos+" SkillPoints \n \n (1) VER PERSONAJE \n (2) EDITAR SKILLS \n (3) VER EQUIPAMIENTO \n (4) TERMINAR EDICION \n \n                           ¡YA PUEDES COMENZAR TU AVENTURA!"));
+    }
+    else{
+        dataConsola = parseInt(prompt("     //////////////////////// EDITA TU PERSONAJE ///////////////////////// \n                     " +Personaje.nombre+"  ||  "+inventario.length+" objetos"+"  ||  "+"$"+Personaje.dinero+"  ||  "+Personaje.skillPuntos+" SkillPoints \n \n (1) VER PERSONAJE \n (2) EDITAR SKILLS \n (3) VER EQUIPAMIENTO \n (4) TERMINAR EDICION \n \n(Tareas: comprar "+comprarObj+" objetos y agregar "+Personaje.skillPuntos+" SkillPoints para continuar)"));
+    }
     while(dataConsola==null || dataConsola<=0 || dataConsola>=6){
         mostrarConsola();
     }
@@ -138,70 +146,172 @@ function mostrarConsola(){
         default:
             mostrarConsola();
             break;
-    }
+    };
 }
 
 function verPersonaje(){
-alert("          //////////////////////////     "+Personaje.nombre+"     //////////////////////////\n                       Altura: "+Personaje.altura+"        Peso: "+Personaje.peso+"        Dinero: "+Personaje.dinero+"\n                   Raza: "+Personaje.raza+"        Vida: "+Personaje.vida+"         Experiencia: "+Personaje.experiencia+"\n                       Daño: "+Personaje.damage+"           Objetos: "+Personaje.cantObjetos+"        Fama: "+Personaje.fama+"\n               ------------------------------------------------------"+"\n             FUERZA: "+Personaje.fuerza+"        PERCEPCION: "+Personaje.percepcion+"       RESISTENCIA: "+Personaje.resistencia+"\n            CARISMA: "+Personaje.carisma+"       INTELIGENCIA: "+Personaje.inteligencia+"         AGILIDAD: "+Personaje.agilidad);
+    Personaje.cantObjetos=inventario.length;
+alert("          //////////////////////////     "+Personaje.nombre+"     //////////////////////////\n                       Altura: "+Personaje.altura+"        Peso: "+Personaje.peso+"        Dinero: "+Personaje.dinero+"\n                   Raza: "+Personaje.raza+"        Vida: "+Personaje.vida+"         Experiencia: "+Personaje.experiencia+"\n                       Daño: "+Personaje.damage+"           Objetos: "+Personaje.cantObjetos+"        Fama: "+Personaje.fama+"\n               ------------------------------------------------------"+"\n                  FUERZA: "+Personaje.fuerza+"        PERCEPCION: "+Personaje.percepcion+"       RESISTENCIA: "+Personaje.resistencia+"\n                 CARISMA: "+Personaje.carisma+"       INTELIGENCIA: "+Personaje.inteligencia+"         AGILIDAD: "+Personaje.agilidad+"\n               ------------------------------------------------------\nInventario: "+inventario);
 mostrarConsola();
 }
 
 function editarSkills(){
 let data= parseInt(prompt("                //////////////////////// SKILLS ///////////////////////// \n(1) FUERZA: "+Personaje.fuerza+"                                                                            Puntos: "+Personaje.skillPuntos+"\n(2) PERCEPCION: "+Personaje.percepcion+"\n(3) RESISTENCIA: "+Personaje.resistencia+"\n(4) CARISMA: "+Personaje.carisma+"\n(5) INTELIGENCIA: "+Personaje.inteligencia+"\n(6) AGILIDAD: "+Personaje.agilidad+"                                                (0) Reset Skills    (7) Salir\n             (Elige una habilidad para agregar 1 punto de Skill)"));
-switch (data) {
-    case 0 :
-        Personaje.skillPuntos = 5;
-        resetSkills();
-        editarSkills();
-        break;
-    case 1:
+if(data==0){
+    Personaje.skillPuntos = 5;
+    resetSkills();
+    editarSkills();
+}
+else if(data==7 || data==null){
+    mostrarConsola();
+}
+else if(data==NaN){
+    editarSkills();
+}
+else if(Personaje.skillPuntos>0){
+    if(data==1){
+        Personaje.damage+=10;
         Personaje.fuerza+=1;
         Personaje.skillPuntos--;
         editarSkills();
-        break;
-    case 2:
+    }
+    else if(data==2){
         Personaje.percepcion+=1;
         Personaje.skillPuntos--;
         editarSkills();
-        break;
-    case 3:
+    }
+    else if(data==3){
+        Personaje.vida+=20;
         Personaje.resistencia+=1;
         Personaje.skillPuntos--;
         editarSkills();
-        break;
-    case 4:
+    }
+    else if(data==4){
         Personaje.carisma+=1;
         Personaje.skillPuntos--;
         editarSkills();
-        break;
-    case 5:
+    }
+    else if(data==5){
         Personaje.inteligencia+=1;
         Personaje.skillPuntos--;
         editarSkills();
-        break;
-    case 6:
+    }
+    else if(data==6){
         Personaje.agilidad+=1;
         Personaje.skillPuntos--;
         editarSkills();
-        break;
-    case 7:
+    }
+    else if(data==7){
         mostrarConsola();
-        break;
-    default:
+    }
+    else{
         mostrarConsola();
-        break;
+    }
 }
-
+else if(data>0 && Personaje.skillPuntos==0){
+    alert("Ya usaste todos tus puntos de skill.")
+    editarSkills();
+}
+else{
+    mostrarConsola();
+}
 }
 
 function verEquipamiento(){
-
+let numero = parseInt(prompt("          //////////////////////// EQUIPAMIENTO ///////////////////////// \nDinero: $"+Personaje.dinero+"                          Inventario: "+inventario+"\n \n(1) "+Armor1.nombre+" : $"+Armor1.valor+"             (4) "+Weapon1.nombre+" : $"+Weapon1.valor+"\n(2) "+Armor2.nombre+" : $"+Armor2.valor+"                (5) "+Weapon2.nombre+" : $"+Weapon2.valor+"\n(3) "+Armor3.nombre+" : $"+Armor3.valor+"            (6) "+Weapon3.nombre+" : $"+Weapon3.valor+"\n\n                                                               (0) Reset Compra   (7) Salir"));
+if(numero==7 && inventario.length<1){
+    mostrarConsola();
+}
+else if(numero==0){
+    resetCompra();
+    verEquipamiento();
+}
+else if(numero==1){//COMPRAR ESCUDO FUNCIONA
+    if(Personaje.dinero>=Armor1.valor){
+        Personaje.dinero-=Armor1.valor;
+        inventario.push(Armor1.nombre);
+        verEquipamiento();
+    }
+    else{
+        alert("No tienes suficiente dinero.");
+        verEquipamiento();
+    }
+}
+else if(numero==2){//COMPRAR YELMO FUNCIONA
+    if(Personaje.dinero>=Armor2.valor){
+        Personaje.dinero-=Armor2.valor;
+        inventario.push(Armor2.nombre);
+        verEquipamiento();
+    }
+    else{
+        alert("No tienes suficiente dinero.");
+        verEquipamiento();
+    }
+}
+else if(numero==3){//COMPRAR PECHERA FUNCIONA
+    if(Personaje.dinero>=Armor3.valor){
+        Personaje.dinero-=Armor3.valor;
+        inventario.push(Armor3.nombre);
+        verEquipamiento();
+    }
+    else{
+        alert("No tienes suficiente dinero.");
+        verEquipamiento();
+    }
+}
+else if(numero==4){//COMPRAR ESPADA FUNCIONA
+    if(Personaje.dinero>=Weapon1.valor){
+        Personaje.dinero-=Weapon1.valor;
+        inventario.push(Weapon1.nombre);
+        verEquipamiento();
+    }
+    else{
+        alert("No tienes suficiente dinero.");
+        verEquipamiento();
+    }
+}
+else if(numero==5){//COMPRAR ESPADA FUNCIONA
+    if(Personaje.dinero>=Weapon2.valor){
+        Personaje.dinero-=Weapon2.valor;
+        inventario.push(Weapon2.nombre);
+        verEquipamiento();
+    }
+    else{
+        alert("No tienes suficiente dinero.");
+        verEquipamiento();
+    }
+}
+else if(numero==6){//COMPRAR ESPADA FUNCIONA
+    if(Personaje.dinero>=Weapon3.valor){
+        Personaje.dinero-=Weapon3.valor;
+        inventario.push(Weapon3.nombre);
+        verEquipamiento();
+    }
+    else{
+        alert("No tienes suficiente dinero.");
+        verEquipamiento();
+    }
+}
+else{
+    mostrarConsola();
+}
 }
 
 function comenzarDesafio(){
-
+if(inventario.length>=3 && Personaje.skillPuntos==0){
+    alert("          ¡"+nombre+" COMPLETASTE LA CREACION DE TU PERSONAJE!\n Ahora "+Personaje.nombre+" comenzará su recorrido por las tierras de Singular.\n                                          ¡BUEN VIAJE!");
 }
-
+else{
+    alert("Aún te quedan tareas que completar para poder continuar.");
+    mostrarConsola();
+}
+}
+function resetCompra(){
+    Personaje.dinero=1000;
+    for(let i=inventario.length;i>=1;i--){
+        inventario.pop();
+    }
+}
 function resetSkills(){
 Personaje.fuerza = 5;
 Personaje.percepcion = 5;
