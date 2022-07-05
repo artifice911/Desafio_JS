@@ -38,6 +38,7 @@ class Character{
     }
 }
 const Personaje = new Character("",28,1.79,92,1000,"Human","M");
+
 //CREAR OBJETOS DE TIENDA
 class Equipamiento{
     constructor(nombre,valor,damage,peso,resistencia){
@@ -56,6 +57,11 @@ const Armor1 = new Equipamiento("ESCUDO",300,10,20,100);
 const Armor2 = new Equipamiento("YELMO",200,15,20,70);
 const Armor3 = new Equipamiento("PECHERA",250,5,25,80);
 
+//ARRAYS DE OBJETOS Y PERSONAJES
+const objetos = [Weapon1,Weapon2,Weapon3,Armor1,Armor2,Armor3];
+const avatars = [{id:1,nombre:"Timothy",edad:28,altura:1.79,peso:92,dinero:1000,raza:"Human",genero:"M"},{id:2,nombre:"Morgan",edad:27,altura:1.70,peso:80,dinero:1000,raza:"Human",genero:"F"},{id:3,nombre:"Phillips",edad:32,altura:1.85,peso:92,dinero:1000,raza:"Human",genero:"M"}];
+
+//VARIABLES PARA CARGAR CONSOLA
 let nombre;
 let char;
 let charOk;
