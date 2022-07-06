@@ -1,12 +1,14 @@
 //CREAR PERSONAJES
 class Character{
-    constructor(nombre,edad,altura,peso,dinero,raza,){
+    constructor(id,nombre,edad,altura,peso,dinero,raza,genero){
+        this.id = id;
         this.nombre = nombre;
         this.edad = edad;
         this.altura = altura;
         this.peso = peso;
         this.dinero = dinero;
         this.raza = raza;
+        this.genero = genero;
 
         this.vida = 100;
         this.experiencia = 0;
@@ -37,11 +39,12 @@ class Character{
         alert("Tengo $"+this.dinero+" para comprar equipamiento.");
     }
 }
-const Personaje = new Character("",28,1.79,92,1000,"Human","M");
+const Personaje = new Character(1,"",28,1.79,92,1000,"Human","M");
 
 //CREAR OBJETOS DE TIENDA
 class Equipamiento{
-    constructor(nombre,valor,damage,peso,resistencia){
+    constructor(id,nombre,valor,damage,peso,resistencia){
+        this.id = id;
         this.nombre = nombre,
         this.valor = valor,
         this.damage = damage,
@@ -50,16 +53,22 @@ class Equipamiento{
     }
 }
 
-const Weapon1 = new Equipamiento("ESPADA",400,90,15,50);
-const Weapon2 = new Equipamiento("ARCO",350,45,10,30);
-const Weapon3 = new Equipamiento("BALLESTA",300,70,20,10);
-const Armor1 = new Equipamiento("ESCUDO",300,10,20,100);
-const Armor2 = new Equipamiento("YELMO",200,15,20,70);
-const Armor3 = new Equipamiento("PECHERA",250,5,25,80);
 
-//ARRAYS DE OBJETOS Y PERSONAJES
-const objetos = [Weapon1,Weapon2,Weapon3,Armor1,Armor2,Armor3];
-const avatars = [{id:1,nombre:"Timothy",edad:28,altura:1.79,peso:92,dinero:1000,raza:"Human",genero:"M"},{id:2,nombre:"Morgan",edad:27,altura:1.70,peso:80,dinero:1000,raza:"Human",genero:"F"},{id:3,nombre:"Phillips",edad:32,altura:1.85,peso:92,dinero:1000,raza:"Human",genero:"M"}];
+const Armor1 = new Equipamiento(1,"ESCUDO",300,10,20,100);
+const Armor2 = new Equipamiento(2,"YELMO",200,15,20,70);
+const Armor3 = new Equipamiento(3,"PECHERA",250,5,25,80);
+const Weapon1 = new Equipamiento(4,"ESPADA",400,90,15,50);
+const Weapon2 = new Equipamiento(5,"ARCO",350,45,10,30);
+const Weapon3 = new Equipamiento(6,"BALLESTA",300,70,20,10);
+
+//ARRAYS DE OBJETOS Y PERSONAJES//////////////////////////////////////////////////////
+const objetos = [Armor1,Armor2,Armor3,Weapon1,Weapon2,Weapon3];
+
+const Timothy = [1,"Timothy",28,1.79,92,1000,"Human","M"];
+const Morgan = [2,"Morgan",27,1.70,80,1000,"Human","F"];
+const Phillips = [3,"Phillips",32,1.85,92,1000,"Human","M"];
+
+const avatars = [Timothy,Morgan,Phillips];
 
 //VARIABLES PARA CARGAR CONSOLA
 let nombre;
@@ -90,7 +99,7 @@ function elegirPersonaje(){
         case 1:
             charOk = confirm("          //////////////////////////     TIMOTHY      //////////////////////////\n \nHas elegido a Timothy! \nLider de exploracion y mercader experto.Posee aumentos electronicos en el cuerpo que le dan habilidades sobrehumanas.  \n \n¿Aceptas este personaje?");
             if(charOk==true){
-                Personaje.nombre="Timothy";
+                Personaje.nombre=Timothy[1];
                 mostrarConsola();
             }
             else{
@@ -100,7 +109,7 @@ function elegirPersonaje(){
         case 2:
             charOk = confirm("          //////////////////////////     MORGAN      //////////////////////////\n \nHas elegido a Morgan! \n La cazadora mas fuerte de las tierras altas. Lidera la tribu de piratas del asfalto y se encuentra en busca de su familia. \n \n¿Aceptas este personaje?");
             if(charOk==true){
-                Personaje.nombre="Morgan";
+                Personaje.nombre=Morgan[1];
                 mostrarConsola();
             }
             else{
@@ -110,7 +119,7 @@ function elegirPersonaje(){
         case 3:
             charOk = confirm("          //////////////////////////     PHILLIPS      /////////////////////////\n \nHas elegido a Phillips! \n Especialista en trampas y francotirador, ex militar que ahora trabaja como mercenario para los diferentes clanes del yermo. \n \n¿Aceptas este personaje?");
             if(charOk==true){
-                Personaje.nombre="Phillips";
+                Personaje.nombre=Phillips[1];
                 mostrarConsola();
             }
             else{
@@ -232,7 +241,23 @@ else if(numero==0){
     resetCompra();
     verEquipamiento();
 }
-else if(numero==1){//COMPRAR ESCUDO FUNCIONA
+else if(numero>0 && numero<7){//CHEQUEAR QUE SEA UN NUMERO DENTRO DE LOS 6 OBJETOS QUE SE PUEDEN COMPRAR
+    for(elemento of objetos){
+        if(elemento.id==numero){//RECORRER PARA DETECTAR EL OBJETO ELEGIDO
+            if(Personaje.dinero>=elemento.valor){//CHEQUEAR QUE HAYA DINERO SUFICIENTE
+                Personaje.dinero-=elemento.valor;
+                inventario.push(elemento.nombre);//AGREGAR OBJETO AL INVENTARIO
+                verEquipamiento();
+                break;//ROMPER CICLO SI YA ENCONTRÓ EL OBJETO
+            }
+            else{
+                alert("No tienes suficiente dinero.");
+                verEquipamiento();
+            }
+        }
+    }
+}
+/* else if(numero==1){//COMPRAR ESCUDO FUNCIONA
     if(Personaje.dinero>=Armor1.valor){
         Personaje.dinero-=Armor1.valor;
         inventario.push(Armor1.nombre);
@@ -297,7 +322,7 @@ else if(numero==6){//COMPRAR ESPADA FUNCIONA
         alert("No tienes suficiente dinero.");
         verEquipamiento();
     }
-}
+} */
 else{
     mostrarConsola();
 }
