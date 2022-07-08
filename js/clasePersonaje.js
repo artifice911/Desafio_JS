@@ -107,7 +107,6 @@ function elegirPersonaje() {
             else {
                 return elegirPersonaje();
             }
-            break;
         case 2:
             charOk = confirm("          //////////////////////////     MORGAN      //////////////////////////\n \nHas elegido a Morgan! \n La cazadora mas fuerte de las tierras altas. Lidera la tribu de piratas del asfalto y se encuentra en busca de su familia. \n \n¿Aceptas este personaje?");
             if (charOk == true) {
@@ -116,7 +115,6 @@ function elegirPersonaje() {
             else {
                 return elegirPersonaje();
             }
-            break;
         case 3:
             charOk = confirm("          //////////////////////////     PHILLIPS      /////////////////////////\n \nHas elegido a Phillips! \n Especialista en trampas y francotirador, ex militar que ahora trabaja como mercenario para los diferentes clanes del yermo. \n \n¿Aceptas este personaje?");
             if (charOk == true) {
@@ -125,10 +123,8 @@ function elegirPersonaje() {
             else {
                 return elegirPersonaje();
             }
-            break;
         default:
             return elegirPersonaje();
-            break;
     };
 }
 
