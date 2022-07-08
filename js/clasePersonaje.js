@@ -105,7 +105,7 @@ function elegirPersonaje() {
                 return new Character(1, "Timothy", 28, 1.79, 92, 1000, "Human", "M", []);
             }
             else {
-                elegirPersonaje();
+                return elegirPersonaje();
             }
             break;
         case 2:
@@ -114,7 +114,7 @@ function elegirPersonaje() {
                 return new Character(2, "Morgan", 27, 1.70, 80, 1000, "Human", "F", []);
             }
             else {
-                elegirPersonaje();
+                return elegirPersonaje();
             }
             break;
         case 3:
@@ -123,11 +123,11 @@ function elegirPersonaje() {
                 return new Character(3, "Phillips", 32, 1.85, 92, 1000, "Human", "M", []);
             }
             else {
-                elegirPersonaje();
+                return elegirPersonaje();
             }
             break;
         default:
-            elegirPersonaje();
+            return elegirPersonaje();
             break;
     };
 }
