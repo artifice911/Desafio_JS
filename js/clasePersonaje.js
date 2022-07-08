@@ -72,7 +72,7 @@ const Phillips = [3, "Phillips", 32, 1.85, 92, 1000, "Human", "M"];
 
 const avatars = [Timothy, Morgan, Phillips];
 
-//VARIABLES PARA CARGAR CONSOLA
+//VARIABLES PARA CARGAR CONSOLA.
 let nombre;
 let char;
 let charOk;
@@ -83,6 +83,7 @@ let comprarObj = 3;
 pedirNombre();
 //CLASE DE PERSONAJE  BASE AL CUAL SE LE ASIGNAN LOS VALORES UNA VEZ QUE SE ELIJA PERSONAJE.
 const Personaje = elegirPersonaje();
+//CONSOLA PRINCIPAL DEL EDITOR DE PERSONAJE.
 mostrarConsola();
 
 function pedirNombre() {
