@@ -18,8 +18,8 @@ body{
 }
 .centrado{
     display: flex;
-    align-items: center;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .tarjeta{
@@ -30,5 +30,10 @@ body{
 
 .logostyle{
     height: 200px;
+    width: auto;
+}
+
+.imgChar{
+    height: 70vh;
     width: auto;
 }

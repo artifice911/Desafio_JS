@@ -89,8 +89,18 @@ const sFoot = document.querySelector("#inferior");
 const sConsola = document.querySelector("#consola");
 const pantallas = [sNav,sHome,sCharacter,sSkills,sStore,sFoot,sConsola];
 
+//BOTON COMENZAR EN MAIN
 const boton = document.querySelector("#continue");
 boton.addEventListener("click",mostrarCharacter);
+// BOTONES NEXT Y PREVIOUS EN CHARACTERS CAROUSEL
+let contador=0;
+const imagenesChar = ["../img/timothy.svg","../img/morgan.svg","../img/phillips.svg"];
+const btnNext = document.querySelector("#next");
+const btnBack = document.querySelector("#previous");
+const imgElegida = document.querySelector("#imgElegida");
+btnNext.addEventListener("click",siguiente);
+btnBack.addEventListener("click",anterior);
+
 //INICIA SIMULADOR CON LA PANTALLA MAIN
 mostrarHome();
 
@@ -108,7 +118,7 @@ function mostrarHome(){
 
 function mostrarCharacter(){
     for(let i=0;i<pantallas.length;i++){
-        if(i==2 || i==5){//SE DEJA A LA VISTA LA SECCION HOME Y FOOTER
+        if(i==2 || i==5){//SE DEJA A LA VISTA LA SECCION CHARACTER Y FOOTER
             pantallas[i].className = "visible centrado";
         }
         else{
@@ -116,21 +126,39 @@ function mostrarCharacter(){
         }
     }
     boton.textContent="Elegir";
-    //pedirNombre();
 }
 
-
+function siguiente(){
+    if(contador<2){
+        contador++;
+        imgElegida.src=imagenesChar[contador];
+    }
+    else{
+        contador=0;
+        imgElegida.src=imagenesChar[contador];
+    }
+}
+function anterior(){
+    if(contador>0){
+        contador--;
+        imgElegida.src=imagenesChar[contador];
+    }
+    else{
+        contador=2;
+        imgElegida.src=imagenesChar[contador];
+    }
+}
 //CLASE DE PERSONAJE  BASE AL CUAL SE LE ASIGNAN LOS VALORES UNA VEZ QUE SE ELIJA PERSONAJE.
 // const Personaje = elegirPersonaje();
 // //CONSOLA PRINCIPAL DEL EDITOR DE PERSONAJE.
 // mostrarConsola();
 
-function pedirNombre() {
-    nombre = prompt("          //////////////////////////       INICIO       ////////////////////////// \n \n   ¡Hola forastero! Te encuentras en el yermo de las tierras de Singular.\n                                          ¿CÓMO TE LLAMAS?");
-    while (nombre == "" || nombre == null) {
-        nombre = prompt("          //////////////////////////       INICIO       ////////////////////////// \n \nCreo que no entendí tu nombre, ¿cómo te llamas?");
-    };
-}
+// function pedirNombre() {
+//     nombre = prompt("          //////////////////////////       INICIO       ////////////////////////// \n \n   ¡Hola forastero! Te encuentras en el yermo de las tierras de Singular.\n                                          ¿CÓMO TE LLAMAS?");
+//     while (nombre == "" || nombre == null) {
+//         nombre = prompt("          //////////////////////////       INICIO       ////////////////////////// \n \nCreo que no entendí tu nombre, ¿cómo te llamas?");
+//     };
+// }
 
 // function elegirPersonaje() {
 //     char = parseInt(prompt("//////////////////////////     ELIGE PERSONAJE      //////////////////////////\n" + nombre + ", para comenzar deberás elegir a uno de los siguientes personajes. Elige con un número al personaje para ver su descripcion.\n \n                  (1) TIMOTHY          (2) MORGAN         (3) PHILLIPS \n"));
