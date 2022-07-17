@@ -79,43 +79,58 @@ let charOk;
 let dataConsola;
 let comprarObj = 3;
 
-//MAIN PRINCIPAL
-mostrarHome();
-
-
-function mostrarHome(){
-    home.style.display= "flex";
-    home.style.justifyContent= "center";
-    consolaChar.style.display= "none";
-    skills.style.display= "none";
-}
-
-function mostrarCharacter(){
-    home.style.display= "none";
-    consolaChar.style.display= "flex";
-    skills.style.display= "flex";
-}
+//DOM SECCIONES
+const sHome = document.querySelector("#home");
+const sCharacter = document.querySelector("#chooseChar");
+const sSkills = document.querySelector("#skills");
+const sStore = document.querySelector("#store");
+const sNav = document.querySelector("#superior");
+const sFoot = document.querySelector("#inferior");
+const sConsola = document.querySelector("#consola");
+const pantallas = [sNav,sHome,sCharacter,sSkills,sStore,sFoot,sConsola];
 
 const boton = document.querySelector("#continue");
 boton.addEventListener("click",mostrarCharacter);
+//INICIA SIMULADOR CON LA PANTALLA MAIN
+mostrarHome();
+
+function mostrarHome(){
+    for(let i=0;i<pantallas.length;i++){
+        if(i==1 || i==5){//SE DEJA A LA VISTA LA SECCION HOME Y FOOTER
+            pantallas[i].className = "visible centrado";
+        }
+        else{
+            pantallas[i].className = "oculto";
+        }
+    }
+    boton.textContent="Comenzar";
+}
+
+function mostrarCharacter(){
+    for(let i=0;i<pantallas.length;i++){
+        if(i==2 || i==5){//SE DEJA A LA VISTA LA SECCION HOME Y FOOTER
+            pantallas[i].className = "visible centrado";
+        }
+        else{
+            pantallas[i].className = "oculto";
+        }
+    }
+    boton.textContent="Elegir";
+    //pedirNombre();
+}
 
 
-
-
-
-// //INICIAR PROGRAMA
-// pedirNombre();
-// //CLASE DE PERSONAJE  BASE AL CUAL SE LE ASIGNAN LOS VALORES UNA VEZ QUE SE ELIJA PERSONAJE.
+//CLASE DE PERSONAJE  BASE AL CUAL SE LE ASIGNAN LOS VALORES UNA VEZ QUE SE ELIJA PERSONAJE.
 // const Personaje = elegirPersonaje();
 // //CONSOLA PRINCIPAL DEL EDITOR DE PERSONAJE.
 // mostrarConsola();
 
-// function pedirNombre() {
-//     nombre = prompt("          //////////////////////////       INICIO       ////////////////////////// \n \n   ¡Hola forastero! Te encuentras en el yermo de las tierras de Singular.\n                                          ¿CÓMO TE LLAMAS?");
-//     while (nombre == "" || nombre == null) {
-//         nombre = prompt("          //////////////////////////       INICIO       ////////////////////////// \n \nCreo que no entendí tu nombre, ¿cómo te llamas?");
-//     };
-// }
+function pedirNombre() {
+    nombre = prompt("          //////////////////////////       INICIO       ////////////////////////// \n \n   ¡Hola forastero! Te encuentras en el yermo de las tierras de Singular.\n                                          ¿CÓMO TE LLAMAS?");
+    while (nombre == "" || nombre == null) {
+        nombre = prompt("          //////////////////////////       INICIO       ////////////////////////// \n \nCreo que no entendí tu nombre, ¿cómo te llamas?");
+    };
+}
 
 // function elegirPersonaje() {
 //     char = parseInt(prompt("//////////////////////////     ELIGE PERSONAJE      //////////////////////////\n" + nombre + ", para comenzar deberás elegir a uno de los siguientes personajes. Elige con un número al personaje para ver su descripcion.\n \n                  (1) TIMOTHY          (2) MORGAN         (3) PHILLIPS \n"));
