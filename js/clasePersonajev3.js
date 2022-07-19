@@ -66,9 +66,13 @@ const Weapon3 = new Equipamiento(6, "BALLESTA", 300, 70, 20, 10, "weapon");
 //ARRAYS DE OBJETOS Y PERSONAJES//////////////////////////////////////////////////////
 const objetos = [Armor1, Armor2, Armor3, Weapon1, Weapon2, Weapon3];
 
+let Personaje = new Character(1, "Nombre", 28, 1.79, 92, 1000, "Human", "M", []);
 const Timothy = [1, "Timothy", 28, 1.79, 92, 1000, "Human", "M"];
+const Tim = new Character(1, "Timothy", 28, 1.79, 92, 1000, "Human", "M",[]);
 const Morgan = [2, "Morgan", 27, 1.70, 80, 1000, "Human", "F"];
+const Mor = new Character(2, "Morgan", 27, 1.70, 80, 1000, "Human", "F",[]);
 const Phillips = [3, "Phillips", 32, 1.85, 92, 1000, "Human", "M"];
+const Phil = new Character(3, "Phillips", 32, 1.85, 92, 1000, "Human", "M",[]);
 
 const avatars = [Timothy, Morgan, Phillips];
 const nombresChar =["Timothy","Morgan","Phillips"];
@@ -91,8 +95,8 @@ const sConsola = document.querySelector("#consola");
 const pantallas = [sNav,sHome,sCharacter,sSkills,sStore,sFoot,sConsola];
 
 //BOTON COMENZAR EN MAIN
-const boton = document.querySelector("#continue");
-boton.addEventListener("click",mostrarCharacter);
+const botonMain = document.querySelector("#continue");
+botonMain.addEventListener("click",mostrarCharacter);
 // BOTONES NEXT Y PREVIOUS EN CHARACTERS CAROUSEL
 let contador=0;
 const imagenesChar = ["../img/timothy.svg","../img/morgan.svg","../img/phillips.svg"];
@@ -110,17 +114,19 @@ mostrarHome();
 
 function mostrarHome(){//////////////--PRIMERA SECCION-- PANTALLA DE INICIO DE SIMULADOR//////////
     for(let i=0;i<pantallas.length;i++){
-        if(i==1 || i==5){//SE DEJA A LA VISTA LA SECCION HOME Y FOOTER
-            pantallas[i].className = "visible centrado";
+        if(i==1){//SE DEJA A LA VISTA LA SECCION HOME Y FOOTER
+            pantallas[i].className = "visible centradoMain";
         }
         else{
             pantallas[i].className = "oculto";
         }
     }
-    boton.textContent="Comenzar";
 }
 const descripcionChar = document.querySelector("#descripcionChar");
 const saludo = document.querySelector("#saludo");
+const btnElegir = document.querySelector("#elegir");
+btnElegir.addEventListener("click",elegirPersonaje);//EVENTO QUE MUESTRA LA CONSOLA GENERAL
+
 function mostrarCharacter(){//////////////--SEGUNDA SECCION-- ELECCION DE PERSONAJE//////////
     pedirNombre();
     for(let i=0;i<pantallas.length;i++){
@@ -131,9 +137,8 @@ function mostrarCharacter(){//////////////--SEGUNDA SECCION-- ELECCION DE PERSON
             pantallas[i].className = "oculto";
         }
     }
-    saludo.innerText = "Hola "+nombre+"!, elige un personaje para comenzar.";
+    saludo.innerText = `Hola ${nombre}!, elige un personaje para comenzar.`;
     descripcionChar.innerText =perfilChar[contador];
-    boton.textContent="Elegir";
 }
 
 function siguiente(){
@@ -165,8 +170,7 @@ function anterior(){
     }
 }
 
-// //CONSOLA PRINCIPAL DEL EDITOR DE PERSONAJE.
-// mostrarConsola();
+
 
 function pedirNombre() {
     nombre = prompt("¡Hola forastero! Te encuentras en el yermo de las tierras de Singular.\n                                          ¿CÓMO TE LLAMAS?");
@@ -175,78 +179,62 @@ function pedirNombre() {
     };
 }
 
-// function elegirPersonaje() {
-//     char = parseInt(prompt("//////////////////////////     ELIGE PERSONAJE      //////////////////////////\n" + nombre + ", para comenzar deberás elegir a uno de los siguientes personajes. Elige con un número al personaje para ver su descripcion.\n \n                  (1) TIMOTHY          (2) MORGAN         (3) PHILLIPS \n"));
-//     while (char == null || char <= 0 || char >= 4) {
-//         char = parseInt(prompt("Deberás elegir un personaje para continuar. \n Elige un numero de personaje. \n                  1. TIMOTHY          2. MORGAN         3. PHILLIPS"));
-//     }
-//     switch (char) {
-//         case 1:
-//             charOk = confirm("          //////////////////////////     TIMOTHY      //////////////////////////\n \nHas elegido a Timothy! \nLider de exploracion y mercader experto.Posee aumentos electronicos en el cuerpo que le dan habilidades sobrehumanas.  \n \n¿Aceptas este personaje?");
-//             if (charOk == true) {
-//                 return new Character(1, "Timothy", 28, 1.79, 92, 1000, "Human", "M", []);
-//             }
-//             else {
-//                 return elegirPersonaje();
-//             }
-//         case 2:
-//             charOk = confirm("          //////////////////////////     MORGAN      //////////////////////////\n \nHas elegido a Morgan! \n La cazadora mas fuerte de las tierras altas. Lidera la tribu de piratas del asfalto y se encuentra en busca de su familia. \n \n¿Aceptas este personaje?");
-//             if (charOk == true) {
-//                 return new Character(2, "Morgan", 27, 1.70, 80, 1000, "Human", "F", []);
-//             }
-//             else {
-//                 return elegirPersonaje();
-//             }
-//         case 3:
-//             charOk = confirm("          //////////////////////////     PHILLIPS      /////////////////////////\n \nHas elegido a Phillips! \n Especialista en trampas y francotirador, ex militar que ahora trabaja como mercenario para los diferentes clanes del yermo. \n \n¿Aceptas este personaje?");
-//             if (charOk == true) {
-//                 return new Character(3, "Phillips", 32, 1.85, 92, 1000, "Human", "M", []);
-//             }
-//             else {
-//                 return elegirPersonaje();
-//             }
-//         default:
-//             return elegirPersonaje();
-//     };
-// }
+function elegirPersonaje() {
+    char = contador;
+    switch (char) {
+        case 0:
+            Personaje=Tim;
+            mostrarConsola();
+        case 1:
+            
+            //Personaje = new Character(2, "Morgan", 27, 1.70, 80, 1000, "Human", "F", []);
+            mostrarConsola();
+        case 2:
+            
+            //Personaje = new Character(3, "Phillips", 32, 1.85, 92, 1000, "Human", "M", []);
+            mostrarConsola();
+        default:
+            return mostrarCharacter();
+    };
+}
 
-// function mostrarConsola() {
-//     if (Personaje.skillPuntos == 0 && Personaje.inventario.length >= 3) {
-//         dataConsola = parseInt(prompt("     //////////////////////// EDITA TU PERSONAJE ///////////////////////// \n                     " + Personaje.nombre + "  ||  " + Personaje.inventario.length + " objetos" + "  ||  " + "$" + Personaje.dinero + "  ||  " + Personaje.skillPuntos + " SkillPoints \n \n (1) VER PERSONAJE \n (2) EDITAR SKILLS \n (3) VER OBJETOS \n (4) TERMINAR EDICION \n \n                           ¡YA PUEDES COMENZAR TU AVENTURA!"));
-//     }
-//     else {
-//         dataConsola = parseInt(prompt("     //////////////////////// EDITA TU PERSONAJE ///////////////////////// \n                     " + Personaje.nombre + "  ||  " + Personaje.inventario.length + " objetos" + "  ||  " + "$" + Personaje.dinero + "  ||  " + Personaje.skillPuntos + " SkillPoints \n \n (1) VER PERSONAJE \n (2) EDITAR SKILLS \n (3) VER OBJETOS \n (4) TERMINAR EDICION \n \n(Tareas: comprar " + comprarObj + " OBJETOS y agregar " + Personaje.skillPuntos + " SKILLS para continuar)"));
-//     }
-//     while (dataConsola == null || dataConsola <= 0 || dataConsola >= 6) {
-//         mostrarConsola();
-//     }
-//     switch (dataConsola) {
-//         case 1:
-//             verPersonaje();
-//             break;
-//         case 2:
-//             editarSkills();
-//             break;
-//         case 3:
-//             verEquipamiento();
-//             break;
-//         case 4:
-//             comenzarDesafio();
-//             break;
-//         case 5:
-//             reset();
-//             break;
-//         default:
-//             mostrarConsola();
-//             break;
-//     };
-// }
+function mostrarConsola() {
+    if (Personaje.skillPuntos == 0 && Personaje.inventario.length >= 3) {
+        dataConsola = parseInt(prompt("     //////////////////////// EDITA TU PERSONAJE ///////////////////////// \n                     " + Personaje.nombre + "  ||  " + Personaje.inventario.length + " objetos" + "  ||  " + "$" + Personaje.dinero + "  ||  " + Personaje.skillPuntos + " SkillPoints \n \n (1) VER PERSONAJE \n (2) EDITAR SKILLS \n (3) VER OBJETOS \n (4) TERMINAR EDICION \n \n                           ¡YA PUEDES COMENZAR TU AVENTURA!"));
+    }
+    else {
+        dataConsola = parseInt(prompt("     //////////////////////// EDITA TU PERSONAJE ///////////////////////// \n                     " + Personaje.nombre + "  ||  " + Personaje.inventario.length + " objetos" + "  ||  " + "$" + Personaje.dinero + "  ||  " + Personaje.skillPuntos + " SkillPoints \n \n (1) VER PERSONAJE \n (2) EDITAR SKILLS \n (3) VER OBJETOS \n (4) TERMINAR EDICION \n \n(Tareas: comprar " + comprarObj + " OBJETOS y agregar " + Personaje.skillPuntos + " SKILLS para continuar)"));
+    }
+    while (dataConsola == null || dataConsola <= 0 || dataConsola >= 6) {
+        mostrarConsola();
+    }
+    switch (dataConsola) {
+        case 1:
+            verPersonaje();
+            break;
+        case 2:
+            editarSkills();
+            break;
+        case 3:
+            verEquipamiento();
+            break;
+        case 4:
+            comenzarDesafio();
+            break;
+        case 5:
+            reset();
+            break;
+        default:
+            mostrarConsola();
+            break;
+    };
+}
 
-// function verPersonaje() {
-//     Personaje.cantObjetos = Personaje.inventario.length;
-//     alert("          //////////////////////////     " + Personaje.nombre + "     //////////////////////////\n                       Altura: " + Personaje.altura + "        Peso: " + Personaje.peso + "        Dinero: " + Personaje.dinero + "\n                   Raza: " + Personaje.raza + "        Vida: " + Personaje.vida + "         Experiencia: " + Personaje.experiencia + "\n                       Daño: " + Personaje.damage + "           Objetos: " + Personaje.cantObjetos + "        Fama: " + Personaje.fama + "\n               ------------------------------------------------------" + "\n                  FUERZA: " + Personaje.fuerza + "        PERCEPCION: " + Personaje.percepcion + "       RESISTENCIA: " + Personaje.resistencia + "\n                 CARISMA: " + Personaje.carisma + "       INTELIGENCIA: " + Personaje.inteligencia + "         AGILIDAD: " + Personaje.agilidad + "\n               ------------------------------------------------------\nInventario: " + Personaje.inventario);
-//     mostrarConsola();
-// }
+function verPersonaje() {
+    Personaje.cantObjetos = Personaje.inventario.length;
+    alert("          //////////////////////////     " + Personaje.nombre + "     //////////////////////////\n                       Altura: " + Personaje.altura + "        Peso: " + Personaje.peso + "        Dinero: " + Personaje.dinero + "\n                   Raza: " + Personaje.raza + "        Vida: " + Personaje.vida + "         Experiencia: " + Personaje.experiencia + "\n                       Daño: " + Personaje.damage + "           Objetos: " + Personaje.cantObjetos + "        Fama: " + Personaje.fama + "\n               ------------------------------------------------------" + "\n                  FUERZA: " + Personaje.fuerza + "        PERCEPCION: " + Personaje.percepcion + "       RESISTENCIA: " + Personaje.resistencia + "\n                 CARISMA: " + Personaje.carisma + "       INTELIGENCIA: " + Personaje.inteligencia + "         AGILIDAD: " + Personaje.agilidad + "\n               ------------------------------------------------------\nInventario: " + Personaje.inventario);
+    mostrarConsola();
+}
 
 // function editarSkills() {
 //     let data = parseInt(prompt("                //////////////////////// SKILLS ///////////////////////// \n(1) FUERZA: " + Personaje.fuerza + "                                                                            Puntos: " + Personaje.skillPuntos + "\n(2) PERCEPCION: " + Personaje.percepcion + "\n(3) RESISTENCIA: " + Personaje.resistencia + "\n(4) CARISMA: " + Personaje.carisma + "\n(5) INTELIGENCIA: " + Personaje.inteligencia + "\n(6) AGILIDAD: " + Personaje.agilidad + "                                                (0) Reset Skills    (7) Salir\n             (Elige una habilidad para agregar 1 punto de Skill)"));
