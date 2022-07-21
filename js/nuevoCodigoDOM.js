@@ -82,10 +82,6 @@ const sConsola = document.querySelector("#consola");
 const sGame = document.querySelector("#game");
 const pantallas = [sHome,sCharacter,sSkills,sStore,sConsola,sGame];
 
-//BOTON COMENZAR EN MAIN
-const botonMain = document.querySelector("#btnComenzar");
-botonMain.addEventListener("click",mostrarCharacter);
-
 // BOTONES NEXT Y PREVIOUS EN CHARACTERS CAROUSEL
 let contador=0;
 const imagenesChar = ["../img/timothy.svg","../img/morgan.svg","../img/phillips.svg"];
@@ -116,6 +112,9 @@ const saludo = document.querySelector("#saludo");
 const btnElegir = document.querySelector("#elegir");
 //btnElegir.addEventListener("click",elegirPersonaje);//EVENTO QUE MUESTRA LA CONSOLA GENERAL
 
+//BOTON COMENZAR EN MAIN
+const botonMain = document.querySelector("#btnComenzar");
+botonMain.addEventListener("click",mostrarCharacter);
 //--SEGUNDA SECCION-- ELECCION DE PERSONAJE//////////
 function mostrarCharacter(){
     nick = document.querySelector("#nickName");
@@ -124,7 +123,7 @@ function mostrarCharacter(){
     }
     else{
         for(let i=0;i<pantallas.length;i++){
-            if(i==1){//SE DEJA A LA VISTA LA SECCION CHARACTER
+            if(i==1){//SE DEJA A LA VISTA LA SECCION HOME
                 pantallas[i].className = "d-flex flex-column align-items-center";
             }
             else{
