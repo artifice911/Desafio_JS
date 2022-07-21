@@ -85,6 +85,7 @@ const pantallas = [sHome,sCharacter,sConsola,sSkills,sStore,sGame];
 // BOTONES NEXT Y PREVIOUS EN CHARACTERS CAROUSEL
 let contador=0;
 const imagenesChar = ["../img/timothy.svg","../img/morgan.svg","../img/phillips.svg"];
+const bodyChar = ["../img/bodyTim.svg","../img/bodyMor.svg","../img/bodyPhil.svg"];
 const btnNext = document.querySelector("#next");
 const btnBack = document.querySelector("#previous");
 const imgElegida = document.querySelector("#imgElegida");
@@ -191,33 +192,19 @@ function mostrarConsola() {
             pantallas[i].className = "d-none";
         }
     }
-    // if (Personaje.skillPuntos == 0 && Personaje.inventario.length >= 3) {
-    //     dataConsola = parseInt(prompt("     //////////////////////// EDITA TU PERSONAJE ///////////////////////// \n                     " + Personaje.nombre + "  ||  " + Personaje.inventario.length + " objetos" + "  ||  " + "$" + Personaje.dinero + "  ||  " + Personaje.skillPuntos + " SkillPoints \n \n (1) VER PERSONAJE \n (2) EDITAR SKILLS \n (3) VER OBJETOS \n (4) TERMINAR EDICION \n \n                           ¡YA PUEDES COMENZAR TU AVENTURA!"));
-    // }
-    // else {
-    //     dataConsola = parseInt(prompt("     //////////////////////// EDITA TU PERSONAJE ///////////////////////// \n                     " + Personaje.nombre + "  ||  " + Personaje.inventario.length + " objetos" + "  ||  " + "$" + Personaje.dinero + "  ||  " + Personaje.skillPuntos + " SkillPoints \n \n (1) VER PERSONAJE \n (2) EDITAR SKILLS \n (3) VER OBJETOS \n (4) TERMINAR EDICION \n \n(Tareas: comprar " + comprarObj + " OBJETOS y agregar " + Personaje.skillPuntos + " SKILLS para continuar)"));
-    // }
-    // while (dataConsola == null || dataConsola <= 0 || dataConsola >= 6) {
-    //     mostrarConsola();
-    // }
-    // switch (dataConsola) {
-    //     case 1:
-    //         verPersonaje();
-    //         break;
-    //     case 2:
-    //         editarSkills();
-    //         break;
-    //     case 3:
-    //         verEquipamiento();
-    //         break;
-    //     case 4:
-    //         comenzarDesafio();
-    //         break;
-    //     case 5:
-    //         reset();
-    //         break;
-    //     default:
-    //         mostrarConsola();
-    //         break;
-    // };
+    const tarea2 = document.querySelector("#tarea2");
+    bodyImg.src=bodyChar[contador];
+    if (Personaje.skillPuntos == 0 && Personaje.inventario.length >= 3) {
+        tarea2.innerText="¡YA PUEDES COMENZAR TU AVENTURA!";
+    }
+    else {
+        tarea2.innerText=`Tareas: comprar ${comprarObj} OBJETOS y agregar ${Personaje.skillPuntos} SKILLS para continuar`;
+    }
+    const obj = document.querySelector("#cantObj");
+    if(Personaje.inventario.length==null){
+        obj.innerText = 0;
+    }
+    else{
+        obj.innerText = Personaje.inventario.length;
+    }
 }
