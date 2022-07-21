@@ -80,7 +80,7 @@ const sSkills = document.querySelector("#skills");
 const sStore = document.querySelector("#store");
 const sConsola = document.querySelector("#consola");
 const sGame = document.querySelector("#game");
-const pantallas = [sHome,sCharacter,sSkills,sStore,sConsola,sGame];
+const pantallas = [sHome,sCharacter,sConsola,sSkills,sStore,sGame];
 
 // BOTONES NEXT Y PREVIOUS EN CHARACTERS CAROUSEL
 let contador=0;
@@ -107,14 +107,14 @@ function mostrarHome(){
     }
 }
 
-const descripcionChar = document.querySelector("#descripcionChar");
-const saludo = document.querySelector("#saludo");
-const btnElegir = document.querySelector("#elegir");
-//btnElegir.addEventListener("click",elegirPersonaje);//EVENTO QUE MUESTRA LA CONSOLA GENERAL
-
 //BOTON COMENZAR EN MAIN
 const botonMain = document.querySelector("#btnComenzar");
 botonMain.addEventListener("click",mostrarCharacter);
+const descripcionChar = document.querySelector("#descripcionChar");
+const saludo = document.querySelector("#saludo");
+const btnElegir = document.querySelector("#elegir");
+btnElegir.addEventListener("click",elegirPersonaje);//EVENTO QUE MUESTRA LA CONSOLA GENERAL
+
 //--SEGUNDA SECCION-- ELECCION DE PERSONAJE//////////
 function mostrarCharacter(){
     nick = document.querySelector("#nickName");
@@ -135,7 +135,7 @@ function mostrarCharacter(){
     }
     
 }
-
+//MANEJAR CARRUSEL DE PERSONAJES
 function siguiente(){
     if(contador<2){
         contador++;
@@ -163,4 +163,61 @@ function anterior(){
         nombreChar.innerText = nombresChar[contador]; //CAMBIO NOMBRE DE PERSONAJES
         descripcionChar.innerText =perfilChar[contador];
     }
+}
+function elegirPersonaje() {
+    switch (contador) {
+        case 0:
+            Personaje=Tim;
+            mostrarConsola();
+            break
+        case 1:
+            Personaje=Mor;
+            mostrarConsola();
+            break
+        case 2:
+            Personaje=Phil;
+            mostrarConsola();
+            break
+        default:
+            mostrarCharacter();
+    };
+}
+function mostrarConsola() {
+    for(let i=0;i<pantallas.length;i++){
+        if(i==2){//SE DEJA A LA VISTA LA SECCION HOME
+            pantallas[i].className = "d-flex flex-column align-items-center";
+        }
+        else{
+            pantallas[i].className = "d-none";
+        }
+    }
+    // if (Personaje.skillPuntos == 0 && Personaje.inventario.length >= 3) {
+    //     dataConsola = parseInt(prompt("     //////////////////////// EDITA TU PERSONAJE ///////////////////////// \n                     " + Personaje.nombre + "  ||  " + Personaje.inventario.length + " objetos" + "  ||  " + "$" + Personaje.dinero + "  ||  " + Personaje.skillPuntos + " SkillPoints \n \n (1) VER PERSONAJE \n (2) EDITAR SKILLS \n (3) VER OBJETOS \n (4) TERMINAR EDICION \n \n                           ¡YA PUEDES COMENZAR TU AVENTURA!"));
+    // }
+    // else {
+    //     dataConsola = parseInt(prompt("     //////////////////////// EDITA TU PERSONAJE ///////////////////////// \n                     " + Personaje.nombre + "  ||  " + Personaje.inventario.length + " objetos" + "  ||  " + "$" + Personaje.dinero + "  ||  " + Personaje.skillPuntos + " SkillPoints \n \n (1) VER PERSONAJE \n (2) EDITAR SKILLS \n (3) VER OBJETOS \n (4) TERMINAR EDICION \n \n(Tareas: comprar " + comprarObj + " OBJETOS y agregar " + Personaje.skillPuntos + " SKILLS para continuar)"));
+    // }
+    // while (dataConsola == null || dataConsola <= 0 || dataConsola >= 6) {
+    //     mostrarConsola();
+    // }
+    // switch (dataConsola) {
+    //     case 1:
+    //         verPersonaje();
+    //         break;
+    //     case 2:
+    //         editarSkills();
+    //         break;
+    //     case 3:
+    //         verEquipamiento();
+    //         break;
+    //     case 4:
+    //         comenzarDesafio();
+    //         break;
+    //     case 5:
+    //         reset();
+    //         break;
+    //     default:
+    //         mostrarConsola();
+    //         break;
+    // };
 }

@@ -28,3 +28,20 @@ body {
     width: 12vw;
     height: auto;
 }
+
+.panel{
+    width: 35vw;
+    height: 58vh;
+}
+.medio{
+    width: 20vw;
+    height: 58vh;
+}
+.panelb{
+    width: 35vw;
+    height: 15vh;
+}
+.mediob{
+    width: 20vw;
+    height: 15vh;
+}

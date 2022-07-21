@@ -43,10 +43,82 @@
                 <p class="d-flex justify-content-center text-center bg-white rounded p-1" id="descripcionChar">
                 </p>
             </div>
-            <button class="btn btn-primary" type="button" id="elegir">Elegir</button>
+            <a class="btn btn-primary" type="button" id="elegir">Elegir</a>
         </div>
         <!-----SECCION CONSOLA PRINCIPAL-->
         <div id="consola">
+            <h5 class="d-flex justify-content-center text-center mt-3">
+                Tareas:
+            </h5>
+            <div class="d-flex justify-content-between">
+                <div class=" bg-white medio m-2 rounded d-flex justify-content-center align-items-center">
+                    <img class="h-75 w-auto" src="./img/bodyTim.svg" alt="personaje">
+                </div>
+                <div class="medio d-flex flex-column m-2 justify-content-between">
+                    <div class="bg-white p-2 m-1 rounded">
+                        <h6 class="text-center">Objetos</h6>
+                        <h1 class="text-center">3</h1>
+                    </div>
+                    <div class="bg-white p-2 m-1 rounded">
+                        <h6 class="text-center">SkillPoints</h6>
+                        <h1 class="text-center">3</h1>
+                    </div>
+                    <div class="bg-white p-2 m-1 rounded">
+                        <h6 class="text-center">Dinero</h6>
+                        <h1 class="text-center">3</h1>
+                    </div>
+                </div>
+                <div class="bg-white panel m-2 d-flex flex-column rounded">
+                    <h3 id="nombreChar" class="text-center mt-2">Timothy</h3>
+                    <table class="table p-3">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-center">Features</th>
+                                <th scope="col" class="text-center">Points</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center">Altura</td>
+                                <td class="text-center">54</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">Peso</td>
+                                <td class="text-center">54</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">Vida</td>
+                                <td class="text-center">54</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">Xp</td>
+                                <td class="text-center">54</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">Raza</td>
+                                <td class="text-center">54</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">Fama</td>
+                                <td class="text-center">54</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+            <div class="d-flex justify-content-between mt-2">
+                <div class="mediob d-flex justify-content-center m-2">
+                    <button class="btn btn-primary w-100"> Tienda</button>
+                </div>
+                <div class="mediob d-flex justify-content-center m-2">
+                    <button class="btn btn-primary w-100"> Skills</button>
+                </div>
+                <div class="panelb d-flex justify-content-center m-2">
+                    <button class="btn btn-light w-100" disabled>Terminar Edicion</button>
+                </div>
+            </div>
 
         </div>
         <!-----------------SECCION TIENDA-->
