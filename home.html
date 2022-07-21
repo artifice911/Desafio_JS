@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/estilo.css">
+</head>
+
+<body class="container-fluid fullscreen">
+    <div class="m-3 marco">
+        <!-------------------SECCION MAIN-->
+        <div id="home">
+            <img class="img-fluid p-3 w-50 h-auto" src="./img/logo.svg" alt="logo">
+            <p class="fs-3 mt-4 text-center">
+                ¡Hola forastero!.¿Cuál es tu nombre?
+            </p>
+            <form action="" class="d-flex flex-column ">
+                <input class="rounded text-center" type="text" required placeholder="Tu Nombre Aquí" id="nickName">
+                <input type="submit" class="btn btn-primary mt-5" value="Comenzar" id="btnComenzar"></input>
+            </form>
+        </div>
+        <!--SECCION ELEGIR PERSONAJE-->
+        <div id="chooseChar">
+            <h5 class="d-flex justify-content-center text-center" id="saludo"></h5>
+            <div class="row">
+                <div class="col d-flex align-content-center justify-content-end">
+                    <button class="btn btn-outline-primary btn-lg" id="previous">Back</button>
+                </div>
+                <div class="col d-flex align-content-center justify-content-center">
+                    <img src="./img/timothy.svg" alt="personaje" class="imgChar" id="imgElegida">
+                </div>
+                <div class="col d-flex align-content-center justify-content-start">
+                    <button class="btn btn-outline-primary btn-lg" id="next">Next</button>
+                </div>
+            </div>
+            <div class="col-12 d-flex flex-column align-items-center">
+                <h3 id="nombreChar" class="text-white">Timothy</h3>
+                <p class="d-flex justify-content-center text-center bg-white rounded p-1" id="descripcionChar">
+                </p>
+            </div>
+            <div class="col-4 centrado mx-auto">
+                <button class="btn btn-primary" type="button" id="elegir">Elegir</button>
+            </div>
+        </div>
+        <!-----SECCION CONSOLA PRINCIPAL-->
+        <div id="consola">
+
+        </div>
+        <!-----------------SECCION TIENDA-->
+        <div id="store">
+
+        </div>
+        <!----------------SECCION SKILLS-->
+        <div id="skills">
+
+        </div>
+        <!-------------------SECCION NIVEL-->
+        <div id="game">
+
+        </div>
+    </div>
+    <script src="./js/nuevoCodigoDOM.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

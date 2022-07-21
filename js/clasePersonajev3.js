@@ -80,7 +80,6 @@ const perfilChar = ["Lider de exploracion y mercader experto.Posee aumentos elec
 //VARIABLES PARA CARGAR CONSOLA.
 let nombre;
 let char;
-let charOk;
 let dataConsola;
 let comprarObj = 3;
 

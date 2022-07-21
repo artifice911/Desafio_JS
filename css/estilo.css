@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: grey;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.fullscreen {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+}
+
+.marco {
+    height: 93vh;
+    width: 95vw;
+    border-radius: 20px;
+    background-color: rgb(173, 173, 173);
+}
+
+.imgChar{
+    width: 13vw;
+    height: auto;
+}
