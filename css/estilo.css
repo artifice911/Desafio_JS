@@ -60,7 +60,7 @@ body {
     width: 11vw !important;
 }
 .imgEquip{
-    max-width: 5vw;
+    max-width: 10%;
     height: auto;
     gap: 16px !important;
 }

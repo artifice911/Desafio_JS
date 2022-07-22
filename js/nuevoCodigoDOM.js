@@ -50,24 +50,26 @@ const nombresChar =["Timothy","Morgan","Phillips"];
 const perfilChar = ["Lider de exploracion y mercader experto.Posee aumentos electronicos en el cuerpo que le dan habilidades sobrehumanas.","La cazadora mas fuerte de las tierras altas. Lidera la tribu de piratas del asfalto y se encuentra en busca de su familia.","Especialista en trampas y francotirador, ex militar que ahora trabaja como mercenario para los diferentes clanes del yermo."];
 //CREAR OBJETOS DE TIENDA.
 class Equipamiento {
-    constructor(id, nombre, valor, damage, peso, resistencia, categoria) {
+    constructor(id, nombre, valor, damage, peso, resistencia, categoria,url) {
         this.id = id,
             this.nombre = nombre,
             this.valor = valor,
             this.damage = damage,
             this.peso = peso,
             this.resistencia = resistencia,
-            this.categoria = categoria
+            this.categoria = categoria,
+            this.img = url
     }
 }
 
-const Armor1 = new Equipamiento(1, "ESCUDO", 300, 10, 20, 100, "armor");
-const Armor2 = new Equipamiento(2, "YELMO", 200, 15, 20, 70, "armor");
-const Armor3 = new Equipamiento(3, "PECHERA", 250, 5, 25, 80, "armor");
-const Weapon1 = new Equipamiento(4, "ESPADA", 400, 90, 15, 50, "weapon");
-const Weapon2 = new Equipamiento(5, "ARCO", 350, 45, 10, 30, "weapon");
-const Weapon3 = new Equipamiento(6, "BALLESTA", 300, 70, 20, 10, "weapon");
+const Armor1 = new Equipamiento(1, "ESCUDO", 300, 10, 20, 100, "armor","../img/escudo.svg");
+const Armor2 = new Equipamiento(2, "YELMO", 200, 15, 20, 70, "armor","../img/yelmo.svg");
+const Armor3 = new Equipamiento(3, "PECHERA", 250, 5, 25, 80, "armor","../img/pechera.svg");
+const Weapon1 = new Equipamiento(4, "ESPADA", 400, 90, 15, 50, "weapon","../img/espada.svg");
+const Weapon2 = new Equipamiento(5, "ARCO", 350, 45, 10, 30, "weapon","../img/arco.svg");
+const Weapon3 = new Equipamiento(6, "BALLESTA", 300, 70, 20, 10, "weapon","../img/ballesta.svg");
 
+const objetos = [Armor1, Armor2, Armor3, Weapon1, Weapon2, Weapon3];
 //VARIABLES PARA CARGAR CONSOLA.
 let comprarObj = 3;
 let nick;
@@ -218,6 +220,11 @@ function mostrarConsola() {
     const tabla = document.querySelector("tbody");
     tabla.innerHTML = "<tr><td class='text-center'>Altura</td><td class='text-center'>"+Personaje.altura+"</td></tr><tr><td class='text-center'>Peso</td><td class='text-center'>"+Personaje.peso+"</td></tr><tr><td class='text-center'>Vida</td><td class='text-center'>"+Personaje.vida+"</td></tr><tr><td class='text-center'>XP</td><td class='text-center'>"+Personaje.experiencia+"</td></tr><tr><td class='text-center'>Raza</td><td class='text-center'>"+Personaje.raza+"</td></tr><tr><td class='text-center'>Edad</td><td class='text-center'>"+Personaje.edad+"</td></tr>";
 }
+const btnVolver = document.querySelector("#volver");
+const btnVolver2 = document.querySelector("#volver2");
+btnVolver.addEventListener("click",mostrarConsola);
+btnVolver2.addEventListener("click",mostrarConsola);
+const btnComprar = document.querySelector("#comprar");
 
 function mostrarTienda(){
     for(let i=0;i<pantallas.length;i++){
@@ -228,7 +235,13 @@ function mostrarTienda(){
             pantallas[i].className = "d-none";
         }
     }
-
+    const baseTienda = document.querySelector("#baseTienda");
+    baseTienda.innerHTML ="";
+    for(elemento of objetos){
+        const tarjeta = document.createElement("div");
+        tarjeta.innerHTML = "<div class='card d-flex flex-column align-items-center'><img src="+elemento.img+" class='card-img-top imgStore'><div class='card-body d-flex flex-column align-items-center'><h5 class='card-title'>"+elemento.nombre+"</h5><p class='card-text'>"+elemento.valor+"</p><a class='btn btn-primary'>Agregar</a></div></div>";
+        baseTienda.append(tarjeta);
+    }
 }
 function mostrarSkills(){
     for(let i=0;i<pantallas.length;i++){
