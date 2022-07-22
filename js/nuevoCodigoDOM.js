@@ -200,6 +200,8 @@ function mostrarConsola() {
     }
     const tarea2 = document.querySelector("#tarea2");
     bodyImg.src=bodyChar[contador];
+    const nombrePersonaje = document.querySelector("#nombrePer");
+    nombrePersonaje.innerText=Personaje.nombre;
     if (Personaje.skillPuntos == 0 && Personaje.inventario.length >= 3) {
         tarea2.innerText="¡YA PUEDES COMENZAR TU AVENTURA!";
     }
@@ -216,7 +218,7 @@ function mostrarConsola() {
     const puntoskill = document.querySelector("#cantSkills");
     puntoskill.innerText = Personaje.skillPuntos;
     const money = document.querySelector("#cantDinero");
-    money.innerText = Personaje.dinero;
+    money.innerText =Personaje.dinero;
     const tabla = document.querySelector("tbody");
     tabla.innerHTML = "<tr><td class='text-center'>Altura</td><td class='text-center'>"+Personaje.altura+"</td></tr><tr><td class='text-center'>Peso</td><td class='text-center'>"+Personaje.peso+"</td></tr><tr><td class='text-center'>Vida</td><td class='text-center'>"+Personaje.vida+"</td></tr><tr><td class='text-center'>XP</td><td class='text-center'>"+Personaje.experiencia+"</td></tr><tr><td class='text-center'>Raza</td><td class='text-center'>"+Personaje.raza+"</td></tr><tr><td class='text-center'>Edad</td><td class='text-center'>"+Personaje.edad+"</td></tr>";
 }
@@ -227,6 +229,7 @@ btnVolver2.addEventListener("click",mostrarConsola);
 const btnComprar = document.querySelector("#comprar");
 
 function mostrarTienda(){
+    
     for(let i=0;i<pantallas.length;i++){
         if(i==4){//SE DEJA A LA VISTA LA SECCION TIENDA
             pantallas[i].className = "d-flex flex-column align-items-center";
@@ -235,14 +238,25 @@ function mostrarTienda(){
             pantallas[i].className = "d-none";
         }
     }
+    const moneyui = document.querySelector("#moneyui");
+    moneyui.innerText="$: "+Personaje.dinero;
     const baseTienda = document.querySelector("#baseTienda");
     baseTienda.innerHTML ="";
     for(elemento of objetos){
         const tarjeta = document.createElement("div");
-        tarjeta.innerHTML = "<div class='card d-flex flex-column align-items-center'><img src="+elemento.img+" class='card-img-top imgStore'><div class='card-body d-flex flex-column align-items-center'><h5 class='card-title'>"+elemento.nombre+"</h5><p class='card-text'>"+elemento.valor+"</p><a class='btn btn-primary'>Agregar</a></div></div>";
+        tarjeta.innerHTML = "<div class='card d-flex flex-column align-items-center m-1'><img src="+elemento.img+" class='card-img-top imgStore'><div class='card-body d-flex flex-column align-items-center'><h5 class='card-title'>"+elemento.nombre+"</h5><p class='card-text'>$ "+elemento.valor+"</p><a class='btn btn-light'id='agregar'>Agregar</a></div></div>";
         baseTienda.append(tarjeta);
     }
+    const agregarObj = document.querySelectorAll("#agregar");
+    console.log(agregarObj);
+    //agregarObj.addEventListener("click",agregarObjeto);
 }
+
+function agregarObjeto(){
+
+}
+
+
 function mostrarSkills(){
     for(let i=0;i<pantallas.length;i++){
         if(i==3){//SE DEJA A LA VISTA LA SECCION SKILLS
