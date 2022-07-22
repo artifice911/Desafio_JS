@@ -25,8 +25,8 @@ body {
 }
 
 .imgChar{
-    width: 12vw;
-    height: auto;
+    height: 50vh;
+    width: auto;
 }
 
 .panel{
@@ -44,4 +44,18 @@ body {
 .mediob{
     width: 20vw;
     height: 15vh;
+}
+.tiendaui{
+    width: 78vw;
+    height: 58vh;
+}
+.tiendaHeader{
+    width: 78vw;
+}
+.imgStore{
+    width: 10vw;
+    height: auto;
+}
+.card{
+    width: 11vw !important;
 }

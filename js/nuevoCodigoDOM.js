@@ -40,8 +40,6 @@ class Character {
         alert("Tengo $" + this.dinero + " para comprar equipamiento.");
     }
 }
-let features = ["Altura","Peso","Vida","Xp","Raza","Fama"];
-let featuresChar;
 let Personaje = new Character(1, "Nombre", 28, 1.79, 92, 1000, "Human", "M", []);
 
 const Tim = new Character(1, "Timothy", 28, 1.79, 92, 1000, "Human", "M",[]);
@@ -184,6 +182,10 @@ function elegirPersonaje() {
             mostrarCharacter();
     };
 }
+const btnTienda = document.querySelector("#btnStore");
+const btnSkills = document.querySelector("#btnSkills");
+btnTienda.addEventListener("click",mostrarTienda);
+btnSkills.addEventListener("click",mostrarSkills);
 
 function mostrarConsola() {
     for(let i=0;i<pantallas.length;i++){
@@ -215,5 +217,26 @@ function mostrarConsola() {
     money.innerText = Personaje.dinero;
     const tabla = document.querySelector("tbody");
     tabla.innerHTML = "<tr><td class='text-center'>Altura</td><td class='text-center'>"+Personaje.altura+"</td></tr><tr><td class='text-center'>Peso</td><td class='text-center'>"+Personaje.peso+"</td></tr><tr><td class='text-center'>Vida</td><td class='text-center'>"+Personaje.vida+"</td></tr><tr><td class='text-center'>XP</td><td class='text-center'>"+Personaje.experiencia+"</td></tr><tr><td class='text-center'>Raza</td><td class='text-center'>"+Personaje.raza+"</td></tr><tr><td class='text-center'>Edad</td><td class='text-center'>"+Personaje.edad+"</td></tr>";
+}
+
+function mostrarTienda(){
+    for(let i=0;i<pantallas.length;i++){
+        if(i==4){//SE DEJA A LA VISTA LA SECCION TIENDA
+            pantallas[i].className = "d-flex flex-column align-items-center";
+        }
+        else{
+            pantallas[i].className = "d-none";
+        }
+    }
     
+}
+function mostrarSkills(){
+    for(let i=0;i<pantallas.length;i++){
+        if(i==3){//SE DEJA A LA VISTA LA SECCION SKILLS
+            pantallas[i].className = "d-flex flex-column align-items-center";
+        }
+        else{
+            pantallas[i].className = "d-none";
+        }
+    }
 }

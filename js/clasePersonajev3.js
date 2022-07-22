@@ -235,67 +235,67 @@ function verPersonaje() {
     mostrarConsola();
 }
 
-// function editarSkills() {
-//     let data = parseInt(prompt("                //////////////////////// SKILLS ///////////////////////// \n(1) FUERZA: " + Personaje.fuerza + "                                                                            Puntos: " + Personaje.skillPuntos + "\n(2) PERCEPCION: " + Personaje.percepcion + "\n(3) RESISTENCIA: " + Personaje.resistencia + "\n(4) CARISMA: " + Personaje.carisma + "\n(5) INTELIGENCIA: " + Personaje.inteligencia + "\n(6) AGILIDAD: " + Personaje.agilidad + "                                                (0) Reset Skills    (7) Salir\n             (Elige una habilidad para agregar 1 punto de Skill)"));
-//     if (data == 0) {
-//         Personaje.skillPuntos = 5;
-//         resetSkills();
-//         editarSkills();
-//     }
-//     else if (data == 7 || data == null) {
-//         mostrarConsola();
-//     }
-//     else if (data == NaN) {
-//         editarSkills();
-//     }
-//     else if (Personaje.skillPuntos > 0) {
-//         if (data == 1) {
-//             Personaje.damage += 10;
-//             Personaje.fuerza += 1;
-//             Personaje.skillPuntos--;
-//             editarSkills();
-//         }
-//         else if (data == 2) {
-//             Personaje.percepcion += 1;
-//             Personaje.skillPuntos--;
-//             editarSkills();
-//         }
-//         else if (data == 3) {
-//             Personaje.vida += 20;
-//             Personaje.resistencia += 1;
-//             Personaje.skillPuntos--;
-//             editarSkills();
-//         }
-//         else if (data == 4) {
-//             Personaje.carisma += 1;
-//             Personaje.skillPuntos--;
-//             editarSkills();
-//         }
-//         else if (data == 5) {
-//             Personaje.inteligencia += 1;
-//             Personaje.skillPuntos--;
-//             editarSkills();
-//         }
-//         else if (data == 6) {
-//             Personaje.agilidad += 1;
-//             Personaje.skillPuntos--;
-//             editarSkills();
-//         }
-//         else if (data == 7) {
-//             mostrarConsola();
-//         }
-//         else {
-//             mostrarConsola();
-//         }
-//     }
-//     else if (data > 0 && Personaje.skillPuntos == 0) {
-//         alert("Ya usaste todos tus puntos de skill.")
-//         editarSkills();
-//     }
-//     else {
-//         mostrarConsola();
-//     }
-// }
+function editarSkills() {
+    let data = parseInt(prompt("                //////////////////////// SKILLS ///////////////////////// \n(1) FUERZA: " + Personaje.fuerza + "                                                                            Puntos: " + Personaje.skillPuntos + "\n(2) PERCEPCION: " + Personaje.percepcion + "\n(3) RESISTENCIA: " + Personaje.resistencia + "\n(4) CARISMA: " + Personaje.carisma + "\n(5) INTELIGENCIA: " + Personaje.inteligencia + "\n(6) AGILIDAD: " + Personaje.agilidad + "                                                (0) Reset Skills    (7) Salir\n             (Elige una habilidad para agregar 1 punto de Skill)"));
+    if (data == 0) {
+        Personaje.skillPuntos = 5;
+        resetSkills();
+        editarSkills();
+    }
+    else if (data == 7 || data == null) {
+        mostrarConsola();
+    }
+    else if (data == NaN) {
+        editarSkills();
+    }
+    else if (Personaje.skillPuntos > 0) {
+        if (data == 1) {
+            Personaje.damage += 10;
+            Personaje.fuerza += 1;
+            Personaje.skillPuntos--;
+            editarSkills();
+        }
+        else if (data == 2) {
+            Personaje.percepcion += 1;
+            Personaje.skillPuntos--;
+            editarSkills();
+        }
+        else if (data == 3) {
+            Personaje.vida += 20;
+            Personaje.resistencia += 1;
+            Personaje.skillPuntos--;
+            editarSkills();
+        }
+        else if (data == 4) {
+            Personaje.carisma += 1;
+            Personaje.skillPuntos--;
+            editarSkills();
+        }
+        else if (data == 5) {
+            Personaje.inteligencia += 1;
+            Personaje.skillPuntos--;
+            editarSkills();
+        }
+        else if (data == 6) {
+            Personaje.agilidad += 1;
+            Personaje.skillPuntos--;
+            editarSkills();
+        }
+        else if (data == 7) {
+            mostrarConsola();
+        }
+        else {
+            mostrarConsola();
+        }
+    }
+    else if (data > 0 && Personaje.skillPuntos == 0) {
+        alert("Ya usaste todos tus puntos de skill.")
+        editarSkills();
+    }
+    else {
+        mostrarConsola();
+    }
+}
 
 // function verEquipamiento() {
 //     let numero = parseInt(prompt("          //////////////////////// EQUIPAMIENTO ///////////////////////// \nDinero: $" + Personaje.dinero + "                          Inventario: " + Personaje.inventario + "\n \n(1) " + Armor1.nombre + " : $" + Armor1.valor + "             (4) " + Weapon1.nombre + " : $" + Weapon1.valor + "\n(2) " + Armor2.nombre + " : $" + Armor2.valor + "                (5) " + Weapon2.nombre + " : $" + Weapon2.valor + "\n(3) " + Armor3.nombre + " : $" + Armor3.valor + "            (6) " + Weapon3.nombre + " : $" + Weapon3.valor + "\n\n                                                               (0) Reset Compra   (7) Salir"));
