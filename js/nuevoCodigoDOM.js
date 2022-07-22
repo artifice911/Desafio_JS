@@ -202,7 +202,7 @@ function mostrarConsola() {
         tarea2.innerText="¡YA PUEDES COMENZAR TU AVENTURA!";
     }
     else {
-        tarea2.innerText=`Tareas: comprar ${comprarObj} OBJETOS y agregar ${Personaje.skillPuntos} SKILLS para continuar`;
+        tarea2.innerText=`Tareas: comprar ${comprarObj} OBJETOS y agregar ${Personaje.skillPuntos} SKILLS para terminar edición`;
     }
     const obj = document.querySelector("#cantObj");
     if(Personaje.inventario.length==null){
@@ -228,7 +228,7 @@ function mostrarTienda(){
             pantallas[i].className = "d-none";
         }
     }
-    
+
 }
 function mostrarSkills(){
     for(let i=0;i<pantallas.length;i++){
