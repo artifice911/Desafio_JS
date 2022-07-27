@@ -62,12 +62,12 @@ class Equipamiento {
     }
 }
 
-const Armor1 = new Equipamiento(1, "ESCUDO", 300, 10, 20, 100, "armor","../img/escudo.svg");
-const Armor2 = new Equipamiento(2, "YELMO", 200, 15, 20, 70, "armor","../img/yelmo.svg");
-const Armor3 = new Equipamiento(3, "PECHERA", 250, 5, 25, 80, "armor","../img/pechera.svg");
-const Weapon1 = new Equipamiento(4, "ESPADA", 400, 90, 15, 50, "weapon","../img/espada.svg");
-const Weapon2 = new Equipamiento(5, "ARCO", 350, 45, 10, 30, "weapon","../img/arco.svg");
-const Weapon3 = new Equipamiento(6, "BALLESTA", 300, 70, 20, 10, "weapon","../img/ballesta.svg");
+const Armor1 = new Equipamiento("uno", "ESCUDO", 300, 10, 20, 100, "armor","../img/escudo.svg");
+const Armor2 = new Equipamiento("dos", "YELMO", 200, 15, 20, 70, "armor","../img/yelmo.svg");
+const Armor3 = new Equipamiento("tres", "PECHERA", 250, 5, 25, 80, "armor","../img/pechera.svg");
+const Weapon1 = new Equipamiento("cuatro", "ESPADA", 400, 90, 15, 50, "weapon","../img/espada.svg");
+const Weapon2 = new Equipamiento("cinco", "ARCO", 350, 45, 10, 30, "weapon","../img/arco.svg");
+const Weapon3 = new Equipamiento("seis", "BALLESTA", 300, 70, 20, 10, "weapon","../img/ballesta.svg");
 
 const objetos = [Armor1, Armor2, Armor3, Weapon1, Weapon2, Weapon3];
 //VARIABLES PARA CARGAR CONSOLA.
@@ -244,16 +244,114 @@ function mostrarTienda(){
     baseTienda.innerHTML ="";
     for(elemento of objetos){
         const tarjeta = document.createElement("div");
-        tarjeta.innerHTML = "<div class='card d-flex flex-column align-items-center m-1'><img src="+elemento.img+" class='card-img-top imgStore'><div class='card-body d-flex flex-column align-items-center'><h5 class='card-title'>"+elemento.nombre+"</h5><p class='card-text'>$ "+elemento.valor+"</p><a class='btn btn-light'id='agregar'>Agregar</a></div></div>";
+        tarjeta.innerHTML = "<div class='card d-flex flex-column align-items-center m-1'><img src="+elemento.img+" class='card-img-top imgStore'><div class='card-body d-flex flex-column align-items-center'><h5 class='card-title'>"+elemento.nombre+"</h5><p class='card-text'>$ "+elemento.valor+"</p><a class='btn btn-success'id="+elemento.id+">Agregar</a></div></div>";
         baseTienda.append(tarjeta);
     }
-    const agregarObj = document.querySelectorAll("#agregar");
-    console.log(agregarObj);
-    //agregarObj.addEventListener("click",agregarObjeto);
+    const escudo = document.querySelector("#uno");
+    escudo.addEventListener("click",agregarUno);
+    const yelmo = document.querySelector("#dos");
+    yelmo.addEventListener("click",agregarDos);
+    const pechera = document.querySelector("#tres");
+    pechera.addEventListener("click",agregarTres);
+    const espada = document.querySelector("#cuatro");
+    espada.addEventListener("click",agregarCuatro);
+    const arco = document.querySelector("#cinco");
+    arco.addEventListener("click",agregarCinco);
+    const ballesta = document.querySelector("#seis");
+    ballesta.addEventListener("click",agregarSeis);
+    
 }
+const equipo = document.querySelector("#equip");
 
-function agregarObjeto(){
-
+function agregarUno(){
+    if (Personaje.dinero >= Armor1.valor) {//CHEQUEAR QUE HAYA DINERO SUFICIENTE
+        Personaje.dinero -= Armor1.valor;
+        Personaje.inventario.push(Armor1.nombre);//AGREGAR OBJETO AL INVENTARIO
+        mostrarTienda();
+        const agregado = document.createElement("div");
+        agregado.className="divImg";
+        agregado.innerHTML="<img src='./img/escudo.svg' class='img-thumbnail imgEquip'>";
+        equipo.append(agregado);
+    }
+    else {
+        alert("No tienes suficiente dinero.");
+        mostrarTienda();
+    }
+}
+function agregarDos(){
+    if (Personaje.dinero >= Armor2.valor) {//CHEQUEAR QUE HAYA DINERO SUFICIENTE
+        Personaje.dinero -= Armor2.valor;
+        Personaje.inventario.push(Armor2.nombre);//AGREGAR OBJETO AL INVENTARIO
+        mostrarTienda();
+        const agregado = document.createElement("div");
+        agregado.className="divImg";
+        agregado.innerHTML="<img src='./img/yelmo.svg' class='img-thumbnail imgEquip'>";
+        equipo.append(agregado);
+    }
+    else {
+        alert("No tienes suficiente dinero.");
+        mostrarTienda();
+    }
+}
+function agregarTres(){
+    if (Personaje.dinero >= Armor3.valor) {//CHEQUEAR QUE HAYA DINERO SUFICIENTE
+        Personaje.dinero -= Armor3.valor;
+        Personaje.inventario.push(Armor3.nombre);//AGREGAR OBJETO AL INVENTARIO
+        mostrarTienda();
+        const agregado = document.createElement("div");
+        agregado.className="divImg";
+        agregado.innerHTML="<img src='./img/pechera.svg' class='img-thumbnail imgEquip'>";
+        equipo.append(agregado);
+    }
+    else {
+        alert("No tienes suficiente dinero.");
+        mostrarTienda();
+    }
+}
+function agregarCuatro(){
+    if (Personaje.dinero >= Weapon1.valor) {//CHEQUEAR QUE HAYA DINERO SUFICIENTE
+        Personaje.dinero -= Weapon1.valor;
+        Personaje.inventario.push(Weapon1.nombre);//AGREGAR OBJETO AL INVENTARIO
+        mostrarTienda();
+        const agregado = document.createElement("div");
+        agregado.className="divImg";
+        agregado.innerHTML="<img src='./img/espada.svg' class='img-thumbnail imgEquip'>";
+        equipo.append(agregado);
+    }
+    else {
+        alert("No tienes suficiente dinero.");
+        mostrarTienda();
+    }
+}
+function agregarCinco(){
+    if (Personaje.dinero >= Weapon2.valor) {//CHEQUEAR QUE HAYA DINERO SUFICIENTE
+        Personaje.dinero -= Weapon2.valor;
+        Personaje.inventario.push(Weapon2.nombre);//AGREGAR OBJETO AL INVENTARIO
+        mostrarTienda();
+        const agregado = document.createElement("div");
+        agregado.className="divImg";
+        agregado.innerHTML="<img src='./img/arco.svg' class='img-thumbnail imgEquip'>";
+        equipo.append(agregado);
+    }
+    else {
+        alert("No tienes suficiente dinero.");
+        mostrarTienda();
+    }
+}
+function agregarSeis(){
+    if (Personaje.dinero >= Armor3.valor) {//CHEQUEAR QUE HAYA DINERO SUFICIENTE
+        Personaje.dinero -= Armor3.valor;
+        Personaje.inventario.push(Armor3.nombre);//AGREGAR OBJETO AL INVENTARIO
+        mostrarTienda();
+        const agregado = document.createElement("div");
+        agregado.className="divImg";
+        agregado.innerHTML="<img src='./img/ballesta.svg' class='img-thumbnail imgEquip'>";
+        equipo.append(agregado);
+    }
+    else {
+        alert("No tienes suficiente dinero.");
+        mostrarTienda();
+    }
 }
 
 
