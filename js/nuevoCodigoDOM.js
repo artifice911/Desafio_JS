@@ -43,10 +43,10 @@ class Character {
         alert("Tengo $" + this.dinero + " para comprar equipamiento.");
     }
 }
-let Personaje = new Character(1, "Nombre", 28, 1.79, 92, 1000, "Human", "M", [],[],1000,"/img/faceTim.svg");
-const Tim = new Character(1, "Timothy", 28, 1.79, 92, 1000, "Human", "M",[],[],1000,"/img/faceTim.svg");
-const Mor = new Character(2, "Morgan", 27, 1.70, 80, 1000, "Human", "F",[],[],1000,"/img/faceMor.svg");
-const Phil = new Character(3, "Phillips", 32, 1.85, 92, 1000, "Human", "M",[],[],1000,"/img/facePhil.svg");
+let Personaje = new Character(1, "Nombre", 28, 1.79, 92, 1000, "Human", "M", [],[],1000,"img/faceTim.svg");
+const Tim = new Character(1, "Timothy", 28, 1.79, 92, 1000, "Human", "M",[],[],1000,"img/faceTim.svg");
+const Mor = new Character(2, "Morgan", 27, 1.70, 80, 1000, "Human", "F",[],[],1000,"img/faceMor.svg");
+const Phil = new Character(3, "Phillips", 32, 1.85, 92, 1000, "Human", "M",[],[],1000,"img/facePhil.svg");
 
 const nombresChar =["Timothy","Morgan","Phillips"];
 const perfilChar = ["Lider de exploracion y mercader experto.Posee aumentos electronicos en el cuerpo que le dan habilidades sobrehumanas.","La cazadora mas fuerte de las tierras altas. Lidera la tribu de piratas del asfalto y se encuentra en busca de su familia.","Especialista en trampas y francotirador, ex militar que ahora trabaja como mercenario para los diferentes clanes del yermo."];
@@ -64,12 +64,12 @@ class Equipamiento {
     }
 }
 
-const Armor1 = new Equipamiento("uno", "ESCUDO", 300, 10, 20, 100, "armor","/img/escudo.svg");
-const Armor2 = new Equipamiento("dos", "YELMO", 200, 15, 20, 70, "armor","/img/yelmo.svg");
-const Armor3 = new Equipamiento("tres", "PECHERA", 250, 5, 25, 80, "armor","/img/pechera.svg");
+const Armor1 = new Equipamiento("uno", "ESCUDO", 300, 10, 20, 100, "armor","img/escudo.svg");
+const Armor2 = new Equipamiento("dos", "YELMO", 200, 15, 20, 70, "armor","img/yelmo.svg");
+const Armor3 = new Equipamiento("tres", "PECHERA", 250, 5, 25, 80, "armor","img/pechera.svg");
 const Weapon1 = new Equipamiento("cuatro", "ESPADA", 400, 90, 15, 50, "weapon","/img/espada.svg");
-const Weapon2 = new Equipamiento("cinco", "ARCO", 350, 45, 10, 30, "weapon","/img/arco.svg");
-const Weapon3 = new Equipamiento("seis", "BALLESTA", 300, 70, 20, 10, "weapon","/img/ballesta.svg");
+const Weapon2 = new Equipamiento("cinco", "ARCO", 350, 45, 10, 30, "weapon","img/arco.svg");
+const Weapon3 = new Equipamiento("seis", "BALLESTA", 300, 70, 20, 10, "weapon","img/ballesta.svg");
 
 const objetos = [Armor1, Armor2, Armor3, Weapon1, Weapon2, Weapon3];
 //VARIABLES PARA CARGAR CONSOLA.
@@ -87,8 +87,8 @@ const pantallas = [sHome,sCharacter,sConsola,sStore,sGame];
 
 // BOTONES NEXT Y PREVIOUS EN CHARACTERS CAROUSEL
 let contador=0;
-const imagenesChar = ["/img/timothy.svg","/img/morgan.svg","/img/phillips.svg"];
-const bodyChar = ["/img/bodyTim.svg","/img/bodyMor.svg","/img/bodyPhil.svg"];
+const imagenesChar = ["img/timothy.svg","img/morgan.svg","img/phillips.svg"];
+const bodyChar = ["img/bodyTim.svg","img/bodyMor.svg","img/bodyPhil.svg"];
 const btnNext = document.querySelector("#next");
 const btnBack = document.querySelector("#previous");
 const imgElegida = document.querySelector("#imgElegida");
