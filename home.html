@@ -68,20 +68,24 @@
                     </div>
                 </div>
                 <div class="bg-white panel m-2 d-flex flex-column rounded">
-                    <h3 id="nombrePer" class="text-center mt-2"></h3>
+                    <div class="d-flex justify-content-around">
+                        <h3 id="nombrePer" class="text-center mt-2"></h3>
+                        <button class="btn bg-secondary bg-gradient text-white" id="btnReset">Reset SkillsPoints</button>
+                    </div>
                     <table class="table p-3">
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center">Features</th>
+                                <th scope="col" class="text-center">Info</th>
+                                <th scope="col" class="text-center">Skills</th>
                                 <th scope="col" class="text-center">Points</th>
+                                <th scope="col" class="text-center">Plus</th>
                             </tr>
                         </thead>
                         <tbody>
                             
                         </tbody>
                     </table>
-
-
                 </div>
             </div>
             <div class="d-flex justify-content-between mt-2">
@@ -89,10 +93,15 @@
                     <button class="btn btn-primary w-100" id="btnStore"> Tienda</button>
                 </div>
                 <div class="mediob d-flex justify-content-center m-2">
-                    <button class="btn btn-primary w-100" id="btnSkills"> Skills</button>
+                    <button class="btn btn-light w-100" disabled id="terminar">Terminar Edicion</button>
                 </div>
-                <div class="panelb d-flex justify-content-center m-2">
-                    <button class="btn btn-light w-100" disabled>Terminar Edicion</button>
+                <div class="panelb d-flex flex-column m-2 justify-content-between bg-white rounded">
+                    <div class="bg-white p-2 m-1 rounded">
+                        <h6 class="text-center">Inventario</h6>
+                        <div class="w-100 d-flex p-2" id="inventarioFull">
+                    
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -111,10 +120,10 @@
             </div>
             <div class="d-flex justify-content-between mt-2">
                 <div class="mediob d-flex justify-content-center m-2">
-                    <button class="btn btn-primary w-100" id="btnStore"> Cancelar Compra</button>
+                    <button class="btn btn-primary w-100" id="btnCancel"> Vaciar Carrito</button>
                 </div>
                 <div class="panelb d-flex flex-column align-items-center m-2 bg-white p-1">
-                Equipamiento
+                Carrito
                 <div class="w-100 d-flex p-2" id="equip">
                     
                 </div>
@@ -124,17 +133,12 @@
                 </div>
             </div>
         </div>
-        <!----------------SECCION SKILLS-->
-        <div id="skills">
-            <div class="d-flex justify-content-around tiendaHeader mt-1">
-                <button class="btn btn-primary" id="volver2">Volver</button>
-                <h5 class="d-flex justify-content-center text-center mt-3">MEJORAS DE SKILLS</h5>
-                <h1 class="text-white">5 SkillPoints</h1>
-            </div>
-        </div>
         <!-------------------SECCION NIVEL-->
-        <div id="game">
-            <img src="./img/landscapeP.svg" class="img-fluid" alt="...">
+        <div id="game" class="bg-img d-flex flex-column align-items-center justify-content-around">
+            <H1 class="text-white mt-5">Aquí comienza la carga del juego</H1>
+            <img src="" alt="facePersonaje" id="facePersona" class="facePer">
+            <button id="mainMenu" class="btn btn-success btn-lg mt-5">Inventario</button>
+
         </div>
     </div>
     <script src="./js/nuevoCodigoDOM.js"></script>

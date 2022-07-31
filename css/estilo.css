@@ -31,19 +31,19 @@ body {
 
 .panel{
     width: 35vw;
-    height: 58vh;
+    height: 59vh;
 }
 .medio{
     width: 20vw;
-    height: 58vh;
+    height: 59vh;
 }
 .panelb{
     width: 35vw;
-    height: 15vh;
+    height: 18vh;
 }
 .mediob{
     width: 20vw;
-    height: 15vh;
+    height: 18vh;
 }
 .tiendaui{
     width: 78vw;
@@ -66,5 +66,19 @@ body {
 }
 .divImg{
     height: 8vh;
+    width: auto;
+}
+.btnplus{
+    background-color: chartreuse;
+    transition: all;
+}
+.btnplus:hover{
+    transform: scale(1.2);
+}
+.bg-img{
+    background-image:url(../img/landscape.svg);
+}
+.facePer{
+    height: 40vh;
     width: auto;
 }

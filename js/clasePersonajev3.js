@@ -297,37 +297,37 @@ function editarSkills() {
     }
 }
 
-// function verEquipamiento() {
-//     let numero = parseInt(prompt("          //////////////////////// EQUIPAMIENTO ///////////////////////// \nDinero: $" + Personaje.dinero + "                          Inventario: " + Personaje.inventario + "\n \n(1) " + Armor1.nombre + " : $" + Armor1.valor + "             (4) " + Weapon1.nombre + " : $" + Weapon1.valor + "\n(2) " + Armor2.nombre + " : $" + Armor2.valor + "                (5) " + Weapon2.nombre + " : $" + Weapon2.valor + "\n(3) " + Armor3.nombre + " : $" + Armor3.valor + "            (6) " + Weapon3.nombre + " : $" + Weapon3.valor + "\n\n                                                               (0) Reset Compra   (7) Salir"));
-//     if (numero == 7 && Personaje.inventario.length < 1) {
-//         mostrarConsola();
-//     }
-//     else if (numero == 0) {
-//         resetCompra();
-//         verEquipamiento();
-//     }
-//     else if (numero > 0 && numero < 7) {//CHEQUEAR QUE SEA UN NUMERO DENTRO DE LOS 6 OBJETOS QUE SE PUEDEN COMPRAR
-//         for (elemento of objetos) {
-//             if (elemento.id == numero) {//RECORRER PARA DETECTAR EL OBJETO ELEGIDO
-//                 if (Personaje.dinero >= elemento.valor) {//CHEQUEAR QUE HAYA DINERO SUFICIENTE
-//                     Personaje.dinero -= elemento.valor;
-//                     Personaje.inventario.push(elemento.nombre);//AGREGAR OBJETO AL INVENTARIO
-//                     verEquipamiento();
-//                     break;//ROMPER CICLO SI YA ENCONTRÓ EL OBJETO
-//                 }
-//                 else {
-//                     alert("No tienes suficiente dinero.");
-//                     verEquipamiento();
-//                 }
-//             }
+function verEquipamiento() {
+    let numero = parseInt(prompt("          //////////////////////// EQUIPAMIENTO ///////////////////////// \nDinero: $" + Personaje.dinero + "                          Inventario: " + Personaje.inventario + "\n \n(1) " + Armor1.nombre + " : $" + Armor1.valor + "             (4) " + Weapon1.nombre + " : $" + Weapon1.valor + "\n(2) " + Armor2.nombre + " : $" + Armor2.valor + "                (5) " + Weapon2.nombre + " : $" + Weapon2.valor + "\n(3) " + Armor3.nombre + " : $" + Armor3.valor + "            (6) " + Weapon3.nombre + " : $" + Weapon3.valor + "\n\n                                                               (0) Reset Compra   (7) Salir"));
+    if (numero == 7 && Personaje.inventario.length < 1) {
+        mostrarConsola();
+    }
+    else if (numero == 0) {
+        resetCompra();
+        verEquipamiento();
+    }
+    else if (numero > 0 && numero < 7) {//CHEQUEAR QUE SEA UN NUMERO DENTRO DE LOS 6 OBJETOS QUE SE PUEDEN COMPRAR
+        for (elemento of objetos) {
+            if (elemento.id == numero) {//RECORRER PARA DETECTAR EL OBJETO ELEGIDO
+                if (Personaje.dinero >= elemento.valor) {//CHEQUEAR QUE HAYA DINERO SUFICIENTE
+                    Personaje.dinero -= elemento.valor;
+                    Personaje.inventario.push(elemento.nombre);//AGREGAR OBJETO AL INVENTARIO
+                    verEquipamiento();
+                    break;//ROMPER CICLO SI YA ENCONTRÓ EL OBJETO
+                }
+                else {
+                    alert("No tienes suficiente dinero.");
+                    verEquipamiento();
+                }
+            }
 
-//         }
+        }
 
-//     }
-//     else {
-//         mostrarConsola();
-//     }
-// }
+    }
+    else {
+        mostrarConsola();
+    }
+}
 
 // function comenzarDesafio() {
 //     if (Personaje.inventario.length >= 3 && Personaje.skillPuntos == 0) {

@@ -1,6 +1,6 @@
 //CREAR PERSONAJES
 class Character {
-    constructor(id, nombre, edad, altura, peso, dinero, raza, genero, inventario) {
+    constructor(id, nombre, edad, altura, peso, dinero, raza, genero, inventario,carrito,cuenta,faceImg) {
         this.id = id;
         this.nombre = nombre;
         this.edad = edad;
@@ -10,6 +10,9 @@ class Character {
         this.raza = raza;
         this.genero = genero;
         this.inventario = inventario;
+        this.carrito = carrito;
+        this.cuenta = cuenta;
+        this.faceImg = faceImg;
 
         this.vida = 100;
         this.experiencia = 0;
@@ -40,11 +43,10 @@ class Character {
         alert("Tengo $" + this.dinero + " para comprar equipamiento.");
     }
 }
-let Personaje = new Character(1, "Nombre", 28, 1.79, 92, 1000, "Human", "M", []);
-
-const Tim = new Character(1, "Timothy", 28, 1.79, 92, 1000, "Human", "M",[]);
-const Mor = new Character(2, "Morgan", 27, 1.70, 80, 1000, "Human", "F",[]);
-const Phil = new Character(3, "Phillips", 32, 1.85, 92, 1000, "Human", "M",[]);
+let Personaje = new Character(1, "Nombre", 28, 1.79, 92, 1000, "Human", "M", [],[],1000,"../img/faceTim.svg");
+const Tim = new Character(1, "Timothy", 28, 1.79, 92, 1000, "Human", "M",[],[],1000,"../img/faceTim.svg");
+const Mor = new Character(2, "Morgan", 27, 1.70, 80, 1000, "Human", "F",[],[],1000,"../img/faceMor.svg");
+const Phil = new Character(3, "Phillips", 32, 1.85, 92, 1000, "Human", "M",[],[],1000,"../img/facePhil.svg");
 
 const nombresChar =["Timothy","Morgan","Phillips"];
 const perfilChar = ["Lider de exploracion y mercader experto.Posee aumentos electronicos en el cuerpo que le dan habilidades sobrehumanas.","La cazadora mas fuerte de las tierras altas. Lidera la tribu de piratas del asfalto y se encuentra en busca de su familia.","Especialista en trampas y francotirador, ex militar que ahora trabaja como mercenario para los diferentes clanes del yermo."];
@@ -62,12 +64,12 @@ class Equipamiento {
     }
 }
 
-const Armor1 = new Equipamiento("uno", "ESCUDO", 300, 10, 20, 100, "armor","../img/escudo.svg");
-const Armor2 = new Equipamiento("dos", "YELMO", 200, 15, 20, 70, "armor","../img/yelmo.svg");
-const Armor3 = new Equipamiento("tres", "PECHERA", 250, 5, 25, 80, "armor","../img/pechera.svg");
-const Weapon1 = new Equipamiento("cuatro", "ESPADA", 400, 90, 15, 50, "weapon","../img/espada.svg");
-const Weapon2 = new Equipamiento("cinco", "ARCO", 350, 45, 10, 30, "weapon","../img/arco.svg");
-const Weapon3 = new Equipamiento("seis", "BALLESTA", 300, 70, 20, 10, "weapon","../img/ballesta.svg");
+const Armor1 = new Equipamiento("uno", "ESCUDO", 300, 10, 20, 100, "armor","./img/escudo.svg");
+const Armor2 = new Equipamiento("dos", "YELMO", 200, 15, 20, 70, "armor","./img/yelmo.svg");
+const Armor3 = new Equipamiento("tres", "PECHERA", 250, 5, 25, 80, "armor","./img/pechera.svg");
+const Weapon1 = new Equipamiento("cuatro", "ESPADA", 400, 90, 15, 50, "weapon","./img/espada.svg");
+const Weapon2 = new Equipamiento("cinco", "ARCO", 350, 45, 10, 30, "weapon","./img/arco.svg");
+const Weapon3 = new Equipamiento("seis", "BALLESTA", 300, 70, 20, 10, "weapon","./img/ballesta.svg");
 
 const objetos = [Armor1, Armor2, Armor3, Weapon1, Weapon2, Weapon3];
 //VARIABLES PARA CARGAR CONSOLA.
@@ -81,7 +83,7 @@ const sSkills = document.querySelector("#skills");
 const sStore = document.querySelector("#store");
 const sConsola = document.querySelector("#consola");
 const sGame = document.querySelector("#game");
-const pantallas = [sHome,sCharacter,sConsola,sSkills,sStore,sGame];
+const pantallas = [sHome,sCharacter,sConsola,sStore,sGame];
 
 // BOTONES NEXT Y PREVIOUS EN CHARACTERS CAROUSEL
 let contador=0;
@@ -111,31 +113,42 @@ function mostrarHome(){
 
 //BOTON COMENZAR EN MAIN
 const botonMain = document.querySelector("#btnComenzar");
-botonMain.addEventListener("click",mostrarCharacter);
+botonMain.addEventListener("click",validar);
 const descripcionChar = document.querySelector("#descripcionChar");
 const saludo = document.querySelector("#saludo");
 const btnElegir = document.querySelector("#elegir");
 btnElegir.addEventListener("click",elegirPersonaje);//EVENTO QUE MUESTRA LA CONSOLA GENERAL
 
 //--SEGUNDA SECCION-- ELECCION DE PERSONAJE//////////
-function mostrarCharacter(){
+
+function validar(){
     nick = document.querySelector("#nickName");
     if (nick.value==""){
         alert("escribe tu nombre para comenzar");
     }
     else{
-        for(let i=0;i<pantallas.length;i++){
-            if(i==1){//SE DEJA A LA VISTA LA SECCION HOME
-                pantallas[i].className = "d-flex flex-column align-items-center";
-            }
-            else{
-                pantallas[i].className = "d-none";
+        for(let i=0;i<localStorage.length;i++){
+            if(nick.value==localStorage.key(i)){
+                Personaje= JSON.parse(localStorage.getItem(nick.value));
+                mostrarConsola();
+                return;
             }
         }
-        saludo.innerText = `Hola ${nick.value}!, elige un personaje para comenzar.`;
-        descripcionChar.innerText =perfilChar[contador];
+        mostrarCharacter();
     }
-    
+}
+
+function mostrarCharacter(){
+    for(let i=0;i<pantallas.length;i++){
+        if(i==1){//SE DEJA A LA VISTA LA SECCION MOSTRAR PERSONAJE
+            pantallas[i].className = "d-flex flex-column align-items-center";
+        }
+        else{
+            pantallas[i].className = "d-none";
+        }
+    }
+    saludo.innerText = `Hola ${nick.value}!, elige un personaje para comenzar.`;
+    descripcionChar.innerText =perfilChar[contador];
 }
 //MANEJAR CARRUSEL DE PERSONAJES
 function siguiente(){
@@ -170,14 +183,20 @@ function elegirPersonaje() {
     switch (contador) {
         case 0:
             Personaje=Tim;
+            const enJSONTim = JSON.stringify(Personaje);
+            localStorage.setItem(nick.value,enJSONTim);
             mostrarConsola();
             break
         case 1:
             Personaje=Mor;
+            const enJSONMor = JSON.stringify(Personaje);
+            localStorage.setItem(nick.value,enJSONMor);
             mostrarConsola();
             break
         case 2:
             Personaje=Phil;
+            const enJSONPhil = JSON.stringify(Personaje);
+            localStorage.setItem(nick.value,enJSONPhil);
             mostrarConsola();
             break
         default:
@@ -185,9 +204,9 @@ function elegirPersonaje() {
     };
 }
 const btnTienda = document.querySelector("#btnStore");
-const btnSkills = document.querySelector("#btnSkills");
 btnTienda.addEventListener("click",mostrarTienda);
-btnSkills.addEventListener("click",mostrarSkills);
+const btnCanceling = document.querySelector("#btnCancel");
+btnCanceling.addEventListener("click",cancelarCompra);
 
 function mostrarConsola() {
     for(let i=0;i<pantallas.length;i++){
@@ -204,9 +223,14 @@ function mostrarConsola() {
     nombrePersonaje.innerText=Personaje.nombre;
     if (Personaje.skillPuntos == 0 && Personaje.inventario.length >= 3) {
         tarea2.innerText="¡YA PUEDES COMENZAR TU AVENTURA!";
+        tarea2.className="d-flex justify-content-center text-center mt-3 bg-white";
+        const empezarJuego = document.querySelector("#terminar");
+        empezarJuego.disabled=false;
+        empezarJuego.className="btn btn-success w-100"
     }
     else {
         tarea2.innerText=`Tareas: comprar ${comprarObj} OBJETOS y agregar ${Personaje.skillPuntos} SKILLS para terminar edición`;
+        tarea2.className="d-flex justify-content-center text-center mt-3";
     }
     const obj = document.querySelector("#cantObj");
     if(Personaje.inventario.length==null){
@@ -218,28 +242,172 @@ function mostrarConsola() {
     const puntoskill = document.querySelector("#cantSkills");
     puntoskill.innerText = Personaje.skillPuntos;
     const money = document.querySelector("#cantDinero");
-    money.innerText =Personaje.dinero;
+    money.innerHTML = Personaje.cuenta;
     const tabla = document.querySelector("tbody");
-    tabla.innerHTML = "<tr><td class='text-center'>Altura</td><td class='text-center'>"+Personaje.altura+"</td></tr><tr><td class='text-center'>Peso</td><td class='text-center'>"+Personaje.peso+"</td></tr><tr><td class='text-center'>Vida</td><td class='text-center'>"+Personaje.vida+"</td></tr><tr><td class='text-center'>XP</td><td class='text-center'>"+Personaje.experiencia+"</td></tr><tr><td class='text-center'>Raza</td><td class='text-center'>"+Personaje.raza+"</td></tr><tr><td class='text-center'>Edad</td><td class='text-center'>"+Personaje.edad+"</td></tr>";
+    tabla.innerHTML = "<tr><td class='text-center bg-light'>Altura</td><td class='text-center bg-light'>"+Personaje.altura+"</td><td class='text-center'>Fuerza</td><td class='text-center'>"+Personaje.fuerza+"<td class='text-center'><button class='btnplus' id='bt1'>+</button></td></tr><tr><td class='text-center bg-light'>Peso</td><td class='text-center bg-light'>"+Personaje.peso+"</td><td class='text-center'>Percepcion</td><td class='text-center'>"+Personaje.percepcion+"</td><td class='text-center'><button class='btnplus' id='bt2'>+</button></td></tr><tr><td class='text-center bg-light'>Vida</td><td class='text-center bg-light'>"+Personaje.vida+"</td><td class='text-center'>Resistencia</td><td class='text-center'>"+Personaje.resistencia+"</td><td class='text-center'><button class='btnplus' id='bt3'>+</button></td></tr><tr><td class='text-center bg-light'>XP</td><td class='text-center bg-light'>"+Personaje.experiencia+"</td><td class='text-center'>Carisma</td><td class='text-center'>"+Personaje.carisma+"</td><td class='text-center'><button class='btnplus' id='bt4'>+</button></td></tr><tr><td class='text-center bg-light'>Daño</td><td class='text-center bg-light'>"+Personaje.damage+"</td><td class='text-center'>Inteligencia</td><td class='text-center'>"+Personaje.inteligencia+"</td><td class='text-center'><button class='btnplus' id='bt5'>+</button></td></tr><tr><td class='text-center bg-light'>Edad</td><td class='text-center bg-light'>"+Personaje.edad+"</td><td class='text-center'>Agilidad</td><td class='text-center'>"+Personaje.agilidad+"</td><td class='text-center'><button class='btnplus' id='bt6'>+</button></td></tr>";
+    const plusFuerza = document.querySelector("#bt1");
+    const plusPercep = document.querySelector("#bt2");
+    const plusResist = document.querySelector("#bt3");
+    const plusCaris = document.querySelector("#bt4");
+    const plusInte = document.querySelector("#bt5");
+    const plusAgil = document.querySelector("#bt6");
+
+    plusFuerza.addEventListener("click",agregarSkill1);
+    plusPercep.addEventListener("click",agregarSkill2);
+    plusResist.addEventListener("click",agregarSkill3);
+    plusCaris.addEventListener("click",agregarSkill4);
+    plusInte.addEventListener("click",agregarSkill5);
+    plusAgil.addEventListener("click",agregarSkill6);
+
+    const consolInven = document.querySelector("#inventarioFull");
+    consolInven.innerHTML="";
+    for(element of Personaje.inventario){
+        const agregado = document.createElement("div");
+        agregado.className="divImg";
+        agregado.innerHTML="<img src='"+element.img+"' class='img-thumbnail imgEquip'>";
+        consolInven.append(agregado);
+    }
+
+    if(Personaje.skillPuntos==0){
+        const botones = document.querySelectorAll(".btnplus");
+        for(let i=0; i<botones.length;i++){
+            botones[i].disabled=true;
+            botones[i].style.backgroundColor="grey";
+        }
+    }
 }
 const btnVolver = document.querySelector("#volver");
-const btnVolver2 = document.querySelector("#volver2");
 btnVolver.addEventListener("click",mostrarConsola);
-btnVolver2.addEventListener("click",mostrarConsola);
 const btnComprar = document.querySelector("#comprar");
+
+const equipo = document.querySelector("#equip");
+const volver = document.querySelector("#volver");
+volver.addEventListener("click",validarCarrito);
+const compraOk = document.querySelector("#comprar");
+compraOk.addEventListener("click",equipaCompra);
+const moneyui = document.querySelector("#moneyui");
+const reset = document.querySelector("#btnReset");
+reset.addEventListener("click",resetSkills);
+const btnTerminar = document.querySelector("#terminar")
+btnTerminar.addEventListener("click",terminarEdicion);
+const mainInventario = document.querySelector("#mainMenu");
+mainInventario.addEventListener("click",mostrarConsola);
+const faceChar = document.querySelector("#facePersona");
+
+
+function resetSkills(){
+    Personaje.fuerza = 5;
+    Personaje.percepcion = 5;
+    Personaje.resistencia = 5;
+    Personaje.carisma = 5;
+    Personaje.inteligencia = 5;
+    Personaje.agilidad = 5;
+    Personaje.vida=100;
+    Personaje.damage=10;
+    Personaje.skillPuntos=5;
+    const enJSON = JSON.stringify(Personaje);
+    localStorage.setItem(nick.value,enJSON);
+    const botones = document.querySelectorAll(".btnplus");
+    console.log(botones);
+    for(let i=0; i<botones.length;i++){
+        botones[i].disabled=false;
+        botones[i].style.backgroundColor="chartreuse";
+    }
+    const empezarJuego = document.querySelector("#terminar");
+        empezarJuego.disabled=true;
+        empezarJuego.className="btn btn-light w-100";
+        
+    mostrarConsola();
+}
+
+function agregarSkill1(){
+    if (Personaje.skillPuntos > 0) {
+        Personaje.damage += 10;
+        Personaje.fuerza += 1;
+        Personaje.skillPuntos--;
+        const enJSON = JSON.stringify(Personaje);
+        localStorage.setItem(nick.value,enJSON);
+        mostrarConsola();
+    }
+    else{
+        alert("Ya no tienes puntos de Skill");
+    }
+}
+function agregarSkill2(){
+    if (Personaje.skillPuntos > 0) {
+        Personaje.percepcion += 1;
+        Personaje.skillPuntos--;
+        const enJSON = JSON.stringify(Personaje);
+        localStorage.setItem(nick.value,enJSON);
+        mostrarConsola();
+    }
+    else{
+        alert("Ya no tienes puntos de Skill");
+    }
+}
+function agregarSkill3(){
+    if (Personaje.skillPuntos > 0) {
+        Personaje.vida += 20;
+        Personaje.resistencia += 1;
+        Personaje.skillPuntos--;
+        const enJSON = JSON.stringify(Personaje);
+        localStorage.setItem(nick.value,enJSON);
+        mostrarConsola();
+    }
+    else{
+        alert("Ya no tienes puntos de Skill");
+    }
+}
+function agregarSkill4(){
+    if (Personaje.skillPuntos > 0) {
+        Personaje.carisma += 1;
+        Personaje.skillPuntos--;
+        const enJSON = JSON.stringify(Personaje);
+        localStorage.setItem(nick.value,enJSON);
+        mostrarConsola();
+    }
+    else{
+        alert("Ya no tienes puntos de Skill");
+    }
+}
+function agregarSkill5(){
+    if (Personaje.skillPuntos > 0) {
+        Personaje.inteligencia += 1;
+        Personaje.skillPuntos--;
+        const enJSON = JSON.stringify(Personaje);
+        localStorage.setItem(nick.value,enJSON);
+        mostrarConsola();
+    }
+    else{
+        alert("Ya no tienes puntos de Skill");
+    }
+}
+function agregarSkill6(){
+    if (Personaje.skillPuntos > 0) {
+        Personaje.agilidad += 1;
+        Personaje.skillPuntos--;
+        const enJSON = JSON.stringify(Personaje);
+        localStorage.setItem(nick.value,enJSON);
+        mostrarConsola();
+    }
+    else{
+        alert("Ya no tienes puntos de Skill");
+    }
+}
+
 
 function mostrarTienda(){
     
     for(let i=0;i<pantallas.length;i++){
-        if(i==4){//SE DEJA A LA VISTA LA SECCION TIENDA
+        if(i==3){//SE DEJA A LA VISTA LA SECCION TIENDA
             pantallas[i].className = "d-flex flex-column align-items-center";
         }
         else{
             pantallas[i].className = "d-none";
         }
     }
-    const moneyui = document.querySelector("#moneyui");
-    moneyui.innerText="$: "+Personaje.dinero;
+    
+    moneyui.innerText="$: "+Personaje.cuenta;
     const baseTienda = document.querySelector("#baseTienda");
     baseTienda.innerHTML ="";
     for(elemento of objetos){
@@ -259,19 +427,28 @@ function mostrarTienda(){
     arco.addEventListener("click",agregarCinco);
     const ballesta = document.querySelector("#seis");
     ballesta.addEventListener("click",agregarSeis);
-    
+
+    equipo.innerHTML="";
+    for(element of Personaje.carrito){
+        const agregado = document.createElement("div");
+        agregado.className="divImg";
+        agregado.innerHTML="<img src='"+element.img+"' class='img-thumbnail imgEquip'>";
+        equipo.append(agregado);
+    }
 }
-const equipo = document.querySelector("#equip");
+
 
 function agregarUno(){
-    if (Personaje.dinero >= Armor1.valor) {//CHEQUEAR QUE HAYA DINERO SUFICIENTE
-        Personaje.dinero -= Armor1.valor;
-        Personaje.inventario.push(Armor1.nombre);//AGREGAR OBJETO AL INVENTARIO
-        mostrarTienda();
+    if (Personaje.cuenta >= Armor1.valor) {//CHEQUEAR QUE HAYA DINERO SUFICIENTE
+        Personaje.cuenta -= Armor1.valor;
+        Personaje.carrito.push(Armor1);//AGREGAR OBJETO AL INVENTARIO
+        const enJSON = JSON.stringify(Personaje);
+        localStorage.setItem(nick.value,enJSON);
         const agregado = document.createElement("div");
         agregado.className="divImg";
         agregado.innerHTML="<img src='./img/escudo.svg' class='img-thumbnail imgEquip'>";
         equipo.append(agregado);
+        moneyui.innerText="$: "+Personaje.cuenta;
     }
     else {
         alert("No tienes suficiente dinero.");
@@ -279,14 +456,16 @@ function agregarUno(){
     }
 }
 function agregarDos(){
-    if (Personaje.dinero >= Armor2.valor) {//CHEQUEAR QUE HAYA DINERO SUFICIENTE
-        Personaje.dinero -= Armor2.valor;
-        Personaje.inventario.push(Armor2.nombre);//AGREGAR OBJETO AL INVENTARIO
-        mostrarTienda();
+    if (Personaje.cuenta >= Armor2.valor) {//CHEQUEAR QUE HAYA DINERO SUFICIENTE
+        Personaje.cuenta -= Armor2.valor;
+        Personaje.carrito.push(Armor2);//AGREGAR OBJETO AL INVENTARIO
+        const enJSON = JSON.stringify(Personaje);
+        localStorage.setItem(nick.value,enJSON);
         const agregado = document.createElement("div");
         agregado.className="divImg";
         agregado.innerHTML="<img src='./img/yelmo.svg' class='img-thumbnail imgEquip'>";
         equipo.append(agregado);
+        moneyui.innerText="$: "+Personaje.cuenta;
     }
     else {
         alert("No tienes suficiente dinero.");
@@ -294,14 +473,16 @@ function agregarDos(){
     }
 }
 function agregarTres(){
-    if (Personaje.dinero >= Armor3.valor) {//CHEQUEAR QUE HAYA DINERO SUFICIENTE
-        Personaje.dinero -= Armor3.valor;
-        Personaje.inventario.push(Armor3.nombre);//AGREGAR OBJETO AL INVENTARIO
-        mostrarTienda();
+    if (Personaje.cuenta >= Armor3.valor) {//CHEQUEAR QUE HAYA DINERO SUFICIENTE
+        Personaje.cuenta -= Armor3.valor;
+        Personaje.carrito.push(Armor3);//AGREGAR OBJETO AL INVENTARIO
+        const enJSON = JSON.stringify(Personaje);
+        localStorage.setItem(nick.value,enJSON);
         const agregado = document.createElement("div");
         agregado.className="divImg";
         agregado.innerHTML="<img src='./img/pechera.svg' class='img-thumbnail imgEquip'>";
         equipo.append(agregado);
+        moneyui.innerText="$: "+Personaje.cuenta;
     }
     else {
         alert("No tienes suficiente dinero.");
@@ -309,14 +490,16 @@ function agregarTres(){
     }
 }
 function agregarCuatro(){
-    if (Personaje.dinero >= Weapon1.valor) {//CHEQUEAR QUE HAYA DINERO SUFICIENTE
-        Personaje.dinero -= Weapon1.valor;
-        Personaje.inventario.push(Weapon1.nombre);//AGREGAR OBJETO AL INVENTARIO
-        mostrarTienda();
+    if (Personaje.cuenta >= Weapon1.valor) {//CHEQUEAR QUE HAYA DINERO SUFICIENTE
+        Personaje.cuenta -= Weapon1.valor;
+        Personaje.carrito.push(Weapon1);//AGREGAR OBJETO AL INVENTARIO
+        const enJSON = JSON.stringify(Personaje);
+        localStorage.setItem(nick.value,enJSON);
         const agregado = document.createElement("div");
         agregado.className="divImg";
         agregado.innerHTML="<img src='./img/espada.svg' class='img-thumbnail imgEquip'>";
         equipo.append(agregado);
+        moneyui.innerText="$: "+Personaje.cuenta;
     }
     else {
         alert("No tienes suficiente dinero.");
@@ -324,14 +507,16 @@ function agregarCuatro(){
     }
 }
 function agregarCinco(){
-    if (Personaje.dinero >= Weapon2.valor) {//CHEQUEAR QUE HAYA DINERO SUFICIENTE
-        Personaje.dinero -= Weapon2.valor;
-        Personaje.inventario.push(Weapon2.nombre);//AGREGAR OBJETO AL INVENTARIO
-        mostrarTienda();
+    if (Personaje.cuenta >= Weapon2.valor) {//CHEQUEAR QUE HAYA DINERO SUFICIENTE
+        Personaje.cuenta -= Weapon2.valor;
+        Personaje.carrito.push(Weapon2);//AGREGAR OBJETO AL INVENTARIO
+        const enJSON = JSON.stringify(Personaje);
+        localStorage.setItem(nick.value,enJSON);
         const agregado = document.createElement("div");
         agregado.className="divImg";
         agregado.innerHTML="<img src='./img/arco.svg' class='img-thumbnail imgEquip'>";
         equipo.append(agregado);
+        moneyui.innerText="$: "+Personaje.cuenta;
     }
     else {
         alert("No tienes suficiente dinero.");
@@ -339,14 +524,16 @@ function agregarCinco(){
     }
 }
 function agregarSeis(){
-    if (Personaje.dinero >= Armor3.valor) {//CHEQUEAR QUE HAYA DINERO SUFICIENTE
-        Personaje.dinero -= Armor3.valor;
-        Personaje.inventario.push(Armor3.nombre);//AGREGAR OBJETO AL INVENTARIO
-        mostrarTienda();
+    if (Personaje.cuenta >= Armor3.valor) {//CHEQUEAR QUE HAYA DINERO SUFICIENTE
+        Personaje.cuenta -= Armor3.valor;
+        Personaje.carrito.push(Armor3);//AGREGAR OBJETO AL INVENTARIO
+        const enJSON = JSON.stringify(Personaje);
+        localStorage.setItem(nick.value,enJSON);
         const agregado = document.createElement("div");
         agregado.className="divImg";
         agregado.innerHTML="<img src='./img/ballesta.svg' class='img-thumbnail imgEquip'>";
         equipo.append(agregado);
+        moneyui.innerText="$: "+Personaje.cuenta;
     }
     else {
         alert("No tienes suficiente dinero.");
@@ -354,14 +541,56 @@ function agregarSeis(){
     }
 }
 
+function validarCarrito(){
+    if(Personaje.carrito.length==0){
+        mostrarConsola();
+    }
+    else{
+        let resultado = confirm("Tienes objetos en tu carrito, ¿deseas confirmar la compra?");
+        if (resultado == true){
+            efectuarCompra();
+        }
+        else{
+            cancelarCompra();
+        }
+    }
+}
 
-function mostrarSkills(){
+function efectuarCompra(){
+    Personaje.inventario=Personaje.inventario.concat(Personaje.carrito);
+    Personaje.carrito=[];
+    Personaje.Dinero=Personaje.cuenta;
+    const enJSON = JSON.stringify(Personaje);
+    localStorage.setItem(nick.value,enJSON);
+    equipo.innerHTML="";
+mostrarConsola();
+}
+function equipaCompra(){
+    Personaje.inventario=Personaje.inventario.concat(Personaje.carrito);
+    Personaje.carrito=[];
+    Personaje.Dinero=Personaje.cuenta;
+    const enJSON = JSON.stringify(Personaje);
+    localStorage.setItem(nick.value,enJSON);
+    equipo.innerHTML="";
+}
+function cancelarCompra(){
+    for(element of Personaje.carrito){
+        Personaje.cuenta+=element.valor;
+    }
+    moneyui.innerText="$: "+Personaje.cuenta;
+    equipo.innerHTML="";
+    Personaje.carrito=[];
+}
+function terminarEdicion(){
     for(let i=0;i<pantallas.length;i++){
-        if(i==3){//SE DEJA A LA VISTA LA SECCION SKILLS
+        if(i==4){//SE DEJA A LA VISTA LA SECCION MOSTRAR PERSONAJE
             pantallas[i].className = "d-flex flex-column align-items-center";
         }
         else{
             pantallas[i].className = "d-none";
         }
     }
+    faceChar.src=Personaje.faceImg;
+    alert("A partir de este momento comienza el juego, mucha suerte!!");
 }
+
