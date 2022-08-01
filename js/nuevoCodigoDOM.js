@@ -124,7 +124,7 @@ btnElegir.addEventListener("click",elegirPersonaje);//EVENTO QUE MUESTRA LA CONS
 function validar(){
     nick = document.querySelector("#nickName");
     if (nick.value==""){
-        alert("escribe tu nombre para comenzar");
+        swal("¿Cómo te llamas?", "Escribe tu nombre para comenzar.");
     }
     else{
         for(let i=0;i<localStorage.length;i++){
@@ -294,7 +294,6 @@ const mainInventario = document.querySelector("#mainMenu");
 mainInventario.addEventListener("click",mostrarConsola);
 const faceChar = document.querySelector("#facePersona");
 
-
 function resetSkills(){
     Personaje.fuerza = 5;
     Personaje.percepcion = 5;
@@ -318,6 +317,10 @@ function resetSkills(){
         empezarJuego.className="btn btn-light w-100";
         
     mostrarConsola();
+    Toastify({
+        text: "Aplica nuevamente los Skillpoints.",
+        duration: 2000
+    }).showToast();
 }
 
 function agregarSkill1(){
@@ -328,9 +331,13 @@ function agregarSkill1(){
         const enJSON = JSON.stringify(Personaje);
         localStorage.setItem(nick.value,enJSON);
         mostrarConsola();
+        Toastify({
+            text: "Aumento de Daño +10",
+            duration: 2000
+        }).showToast();
     }
     else{
-        alert("Ya no tienes puntos de Skill");
+        swal("0 SKILLPOINTS", "Ya no tienes puntos de Skill disponibles.");
     }
 }
 function agregarSkill2(){
@@ -342,7 +349,7 @@ function agregarSkill2(){
         mostrarConsola();
     }
     else{
-        alert("Ya no tienes puntos de Skill");
+        swal("0 SKILLPOINTS", "Ya no tienes puntos de Skill disponibles.");
     }
 }
 function agregarSkill3(){
@@ -353,9 +360,13 @@ function agregarSkill3(){
         const enJSON = JSON.stringify(Personaje);
         localStorage.setItem(nick.value,enJSON);
         mostrarConsola();
+        Toastify({
+            text: "Aumento de Vida +20",
+            duration: 2000
+        }).showToast();
     }
     else{
-        alert("Ya no tienes puntos de Skill");
+        swal("0 SKILLPOINTS", "Ya no tienes puntos de Skill disponibles.");
     }
 }
 function agregarSkill4(){
@@ -367,7 +378,7 @@ function agregarSkill4(){
         mostrarConsola();
     }
     else{
-        alert("Ya no tienes puntos de Skill");
+        swal("0 SKILLPOINTS", "Ya no tienes puntos de Skill disponibles.");
     }
 }
 function agregarSkill5(){
@@ -379,7 +390,7 @@ function agregarSkill5(){
         mostrarConsola();
     }
     else{
-        alert("Ya no tienes puntos de Skill");
+        swal("0 SKILLPOINTS", "Ya no tienes puntos de Skill disponibles.");
     }
 }
 function agregarSkill6(){
@@ -391,10 +402,9 @@ function agregarSkill6(){
         mostrarConsola();
     }
     else{
-        alert("Ya no tienes puntos de Skill");
+        swal("0 SKILLPOINTS", "Ya no tienes puntos de Skill disponibles.");
     }
 }
-
 
 function mostrarTienda(){
     
@@ -437,7 +447,6 @@ function mostrarTienda(){
     }
 }
 
-
 function agregarUno(){
     if (Personaje.cuenta >= Armor1.valor) {//CHEQUEAR QUE HAYA DINERO SUFICIENTE
         Personaje.cuenta -= Armor1.valor;
@@ -451,7 +460,7 @@ function agregarUno(){
         moneyui.innerText="$: "+Personaje.cuenta;
     }
     else {
-        alert("No tienes suficiente dinero.");
+        swal("Dinero Insuficiente", "Ya no tienes suficiente dinero.");
         mostrarTienda();
     }
 }
@@ -468,7 +477,7 @@ function agregarDos(){
         moneyui.innerText="$: "+Personaje.cuenta;
     }
     else {
-        alert("No tienes suficiente dinero.");
+        swal("Dinero Insuficiente", "Ya no tienes suficiente dinero.");
         mostrarTienda();
     }
 }
@@ -485,7 +494,7 @@ function agregarTres(){
         moneyui.innerText="$: "+Personaje.cuenta;
     }
     else {
-        alert("No tienes suficiente dinero.");
+        swal("Dinero Insuficiente", "Ya no tienes suficiente dinero.");
         mostrarTienda();
     }
 }
@@ -502,7 +511,7 @@ function agregarCuatro(){
         moneyui.innerText="$: "+Personaje.cuenta;
     }
     else {
-        alert("No tienes suficiente dinero.");
+        swal("Dinero Insuficiente", "Ya no tienes suficiente dinero.");
         mostrarTienda();
     }
 }
@@ -519,7 +528,7 @@ function agregarCinco(){
         moneyui.innerText="$: "+Personaje.cuenta;
     }
     else {
-        alert("No tienes suficiente dinero.");
+        swal("Dinero Insuficiente", "Ya no tienes suficiente dinero.");
         mostrarTienda();
     }
 }
@@ -536,7 +545,7 @@ function agregarSeis(){
         moneyui.innerText="$: "+Personaje.cuenta;
     }
     else {
-        alert("No tienes suficiente dinero.");
+        swal("Dinero Insuficiente", "Ya no tienes suficiente dinero.");
         mostrarTienda();
     }
 }
@@ -546,16 +555,26 @@ function validarCarrito(){
         mostrarConsola();
     }
     else{
-        let resultado = confirm("Tienes objetos en tu carrito, ¿deseas confirmar la compra?");
-        if (resultado == true){
-            efectuarCompra();
-        }
-        else{
-            cancelarCompra();
-        }
+        swal({
+            title: "Tu carrito esta lleno.",
+            text: "Tienes objetos en tu carrito, ¿deseas confirmar la compra?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: false,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              swal("Los objetos fueron comprados y agregados a tu equipamiento!", {
+                icon: "success",
+              });
+              efectuarCompra();
+            } else {
+              swal("Los objetos fueron borrados de tu carrito.");
+              cancelarCompra();
+            }
+        });
     }
 }
-
 function efectuarCompra(){
     Personaje.inventario=Personaje.inventario.concat(Personaje.carrito);
     Personaje.carrito=[];
@@ -566,12 +585,26 @@ function efectuarCompra(){
 mostrarConsola();
 }
 function equipaCompra(){
-    Personaje.inventario=Personaje.inventario.concat(Personaje.carrito);
-    Personaje.carrito=[];
-    Personaje.Dinero=Personaje.cuenta;
-    const enJSON = JSON.stringify(Personaje);
-    localStorage.setItem(nick.value,enJSON);
-    equipo.innerHTML="";
+    console.log(Personaje.carrito);
+    if(Personaje.carrito.length!=0){
+        Personaje.inventario=Personaje.inventario.concat(Personaje.carrito);
+        Personaje.carrito=[];
+        Personaje.Dinero=Personaje.cuenta;
+        const enJSON = JSON.stringify(Personaje);
+        localStorage.setItem(nick.value,enJSON);
+        equipo.innerHTML="";
+        Toastify({
+            text: "Compra Finalizada. Se agregó al inventario!",
+            duration: 2000
+        }).showToast();
+    }
+    else{
+        Toastify({
+            text: "Debes agregar algo para poder comprar.",
+            duration: 2000
+        }).showToast();
+    }
+    
 }
 function cancelarCompra(){
     for(element of Personaje.carrito){
@@ -591,6 +624,6 @@ function terminarEdicion(){
         }
     }
     faceChar.src=Personaje.faceImg;
-    alert("A partir de este momento comienza el juego, mucha suerte!!");
+    swal("Buen trabajo!", "Edición terminada. A partir de este momento comienza el juego!", "success");
 }
 
