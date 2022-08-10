@@ -231,6 +231,7 @@ const mainInventario = document.querySelector("#mainMenu");
 mainInventario.addEventListener("click",mostrarConsola);
 const faceChar = document.querySelector("#facePersona");
 const relojito = document.querySelector("#reloj");
+const baseTienda = document.querySelector("#baseTienda");
 function resetSkills(){
     Personaje.fuerza = 5;
     Personaje.percepcion = 5;
@@ -342,7 +343,28 @@ function agregarSkill6(){
         swal("0 SKILLPOINTS", "Ya no tienes puntos de Skill disponibles.");
     }
 }
-
+const pedirObjetos = async () => {
+    const resp = await
+    fetch ('/data.json')
+    const datosJson = await resp.json()
+    for(let elemento of datosJson){
+        const tarjeta = document.createElement("div");
+        tarjeta.innerHTML = "<div class='card d-flex flex-column align-items-center m-1'><img src="+elemento.img+" class='card-img-top imgStore'><div class='card-body d-flex flex-column align-items-center'><h5 class='card-title'>"+elemento.nombre+"</h5><p class='card-text'>$ "+elemento.valor+"</p><a class='btn btn-success'id="+elemento.id+">Agregar</a></div></div>";
+        baseTienda.append(tarjeta);
+    }
+    const escudo = document.querySelector("#uno");
+    const yelmo = document.querySelector("#dos");
+    const pechera = document.querySelector("#tres");
+    const espada = document.querySelector("#cuatro");
+    const arco = document.querySelector("#cinco");
+    const ballesta = document.querySelector("#seis");
+    escudo.addEventListener("click",agregarUno);
+    yelmo.addEventListener("click",agregarDos);
+    pechera.addEventListener("click",agregarTres);
+    espada.addEventListener("click",agregarCuatro);
+    arco.addEventListener("click",agregarCinco);
+    ballesta.addEventListener("click",agregarSeis);
+}
 function mostrarTienda(){
     
     for(let i=0;i<pantallas.length;i++){
@@ -355,25 +377,9 @@ function mostrarTienda(){
     }
     tiempo=10;
     moneyui.innerText="$: "+Personaje.cuenta;
-    const baseTienda = document.querySelector("#baseTienda");
     baseTienda.innerHTML ="";
-    for(let elemento of objetos){
-        const tarjeta = document.createElement("div");
-        tarjeta.innerHTML = "<div class='card d-flex flex-column align-items-center m-1'><img src="+elemento.img+" class='card-img-top imgStore'><div class='card-body d-flex flex-column align-items-center'><h5 class='card-title'>"+elemento.nombre+"</h5><p class='card-text'>$ "+elemento.valor+"</p><a class='btn btn-success'id="+elemento.id+">Agregar</a></div></div>";
-        baseTienda.append(tarjeta);
-    }
-    const escudo = document.querySelector("#uno");
-    escudo.addEventListener("click",agregarUno);
-    const yelmo = document.querySelector("#dos");
-    yelmo.addEventListener("click",agregarDos);
-    const pechera = document.querySelector("#tres");
-    pechera.addEventListener("click",agregarTres);
-    const espada = document.querySelector("#cuatro");
-    espada.addEventListener("click",agregarCuatro);
-    const arco = document.querySelector("#cinco");
-    arco.addEventListener("click",agregarCinco);
-    const ballesta = document.querySelector("#seis");
-    ballesta.addEventListener("click",agregarSeis);
+    
+    pedirObjetos();
 
     equipo.innerHTML="";
     for(let element of Personaje.carrito){
