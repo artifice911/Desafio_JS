@@ -13,7 +13,7 @@ import { objetos } from "./objetos.js";
 let comprarObj = 3;
 let nick;
 
-//DOM SECCIONES
+//DOM SECCIONES DE LA PAGINA
 const sHome = document.querySelector("#home");
 const sCharacter = document.querySelector("#chooseChar");
 const sSkills = document.querySelector("#skills");
@@ -56,7 +56,6 @@ const btnElegir = document.querySelector("#elegir");
 btnElegir.addEventListener("click",elegirPersonaje);//EVENTO QUE MUESTRA LA CONSOLA GENERAL
 
 //--SEGUNDA SECCION-- ELECCION DE PERSONAJE//////////
-
 function validar(){
     nick = document.querySelector("#nickName");
     if (nick.value==""){
@@ -73,10 +72,10 @@ function validar(){
         mostrarCharacter();
     }
 }
-
+//SE DEJA A LA VISTA LA SECCION MOSTRAR PERSONAJE
 function mostrarCharacter(){
     for(let i=0;i<pantallas.length;i++){
-        if(i==1){//SE DEJA A LA VISTA LA SECCION MOSTRAR PERSONAJE
+        if(i==1){
             pantallas[i].className = "d-flex flex-column align-items-center";
         }
         else{
@@ -145,6 +144,7 @@ btnTienda.addEventListener("click",mostrarTienda);
 const btnCanceling = document.querySelector("#btnCancel");
 btnCanceling.addEventListener("click",cancelarCompra);
 const bodyImg = document.querySelector("#bodiesImg");
+//CONSOLA PRINCIPAL DEL SIMULADOR
 function mostrarConsola() {
     for(let i=0;i<pantallas.length;i++){
         if(i==2){//SE DEJA A LA VISTA LA SECCION HOME
@@ -365,6 +365,7 @@ const pedirObjetos = async () => {
     arco.addEventListener("click",agregarCinco);
     ballesta.addEventListener("click",agregarSeis);
 }
+//TIENDA PARA COMPRAR EQUIPAMIENTO
 function mostrarTienda(){
     
     for(let i=0;i<pantallas.length;i++){
@@ -557,9 +558,10 @@ function cancelarCompra(){
     equipo.innerHTML="";
     Personaje.carrito=[];
 }
+//SECCION DEL JUEGO PARA CREAR A FUTURO
 function terminarEdicion(){
     for(let i=0;i<pantallas.length;i++){
-        if(i==4){//SE DEJA A LA VISTA LA SECCION MOSTRAR PERSONAJE
+        if(i==4){
             pantallas[i].className = "d-flex flex-column align-items-center";
         }
         else{
@@ -570,6 +572,7 @@ function terminarEdicion(){
     swal("Buen trabajo!", "Edición terminada. A partir de este momento comienza el juego!", "success");
     timer();
 }
+//TIEMPO DE ESPERA PARA COMENZAR JUEGO Y CARGA DE NIVEL.
 function timer(){
     if(tiempo>0){
         relojito.innerHTML= tiempo--;
