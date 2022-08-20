@@ -260,7 +260,7 @@ function resetSkills(){
         duration: 2000
     }).showToast();
 }
-
+//SE AGREGAN PUNTOS DE SKILLS QUE TAMBIEN MODIFICAN LAS FEATURES DEL PERSONAJE Y SE GUARDA EN LOCAL STORAGE
 function agregarSkill1(){
     if (Personaje.skillPuntos > 0) {
         Personaje.damage += 10;
@@ -343,6 +343,7 @@ function agregarSkill6(){
         swal("0 SKILLPOINTS", "Ya no tienes puntos de Skill disponibles.");
     }
 }
+//SE PIDEN LOS OBJETOS DEL JSON LOCAL PARA LA CARGA DE LA TIENDA
 const pedirObjetos = async () => {
     const resp = await
     fetch ('/data.json')
@@ -519,6 +520,7 @@ function validarCarrito(){
         });
     }
 }
+//SE REALIZA LA COMPRA Y SE GUARDA EL PROGRESO EN EL LOCAL STORAGE
 function efectuarCompra(){
     Personaje.inventario=Personaje.inventario.concat(Personaje.carrito);
     Personaje.carrito=[];
