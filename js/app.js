@@ -346,7 +346,12 @@ function agregarSkill6(){
 //SE PIDEN LOS OBJETOS DEL JSON LOCAL PARA LA CARGA DE LA TIENDA
 const pedirObjetos = async () => {
     const resp = await
-    fetch ('/data.json')
+    fetch (`./data.json`, {
+        headers : { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+         }
+      })
     const datosJson = await resp.json()
     for(let elemento of datosJson){
         const tarjeta = document.createElement("div");
